@@ -52,7 +52,7 @@ public class GeographyUtils {
     }
 
     public static void main(String[] args) {
-        System.out.println(getDistance(116.336546, 40.000531, 116.336541,
+        System.out.println(getDistance(116.336546, 41.000531, 116.336541,
                 40.000842));
     }
 

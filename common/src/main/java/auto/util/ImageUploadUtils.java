@@ -50,12 +50,11 @@ public class ImageUploadUtils {
 	
 	/**
 	 * 图片类型
-	 * 
 	 * @author wanglongtao
 	 *
 	 */
 	public enum ImageType {
-		verify, favicon, goods, brand, classify,
+		verify, favicon, goods, brand, classify, qrcode
 	}
 
 	public static String getImageToken() throws Exception {
