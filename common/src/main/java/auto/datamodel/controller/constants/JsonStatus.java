@@ -99,6 +99,8 @@ public class JsonStatus {
     
     public static final int PHONECODE_CODE_ERROR = 2016 ;
     
+    public static final int USER_CODE_ERROT = 2017;
+    
     
     
     
