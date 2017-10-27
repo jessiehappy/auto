@@ -107,6 +107,8 @@ public class JsonStatus {
     
     public static final int COUPON_EMPTYM = 2019;
     
+    public static final int USER_CODE_ERROT = 3000;
+    
     
     //data not empty error msg 
     public static final String unGrantUpload = "未经授权图片上传被拒绝";

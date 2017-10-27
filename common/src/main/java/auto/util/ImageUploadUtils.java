@@ -54,7 +54,7 @@ public class ImageUploadUtils {
 	 *
 	 */
 	public enum ImageType {
-		verify, favicon, goods, brand, classify, qrcode
+		verify, favicon, goods, brand, classify, qrcode,auth,businessLicence
 	}
 
 	public static String getImageToken() throws Exception {
@@ -67,6 +67,36 @@ public class ImageUploadUtils {
 	}
 	public static String getImageKey( ImageType type, String ext) {
 		return type + "/" + DATE_FORMAT.format(new Date()) + (int) (Math.random() * 100) + "." + ext;
+	}
+	/**
+	 * 身份证图像存放位置   type/username/Id***.ext
+	 * @param username
+	 * @param type
+	 * @param ext
+	 * @return
+	 */
+	public static String getImageIdKey(ImageType type,String username, String ext) {
+		return type + "/" +username + "/" + "Id"+DATE_FORMAT.format(new Date()) + (int) (Math.random() * 100) + "." + ext;
+	}
+	/**
+	 * 资格证图像存放位置   type/username/Q***.ext
+	 * @param username
+	 * @param type
+	 * @param ext
+	 * @return
+	 */
+	public static String getImageQKey(ImageType type,String username, String ext) {
+		return type + "/" +username + "/" + "Q"+DATE_FORMAT.format(new Date()) + (int) (Math.random() * 100) + "." + ext;
+	}
+	/**
+	 * 大B 头像存放位置   type/dealer/***.ext
+	 * @param username
+	 * @param type
+	 * @param ext
+	 * @return
+	 */
+	public static String getImageDKey(ImageType type, String ext) {
+		return type + "/" + "dealer" + "/" + DATE_FORMAT.format(new Date()) + (int) (Math.random() * 100) + "." + ext;
 	}
 	/**
 	 * @param accessToken
@@ -117,6 +147,56 @@ public class ImageUploadUtils {
 	 */
 	public static String uploadFavicon(String accessToken, byte[] contents, String ext) throws Exception {
 		String name = getImageKey(ImageType.favicon, ext);
+		return upload(accessToken, name, contents);
+	}
+	/**
+	 * 上传身份证
+	 * @param username
+	 * @param contents
+	 * @param ext
+	 * @return
+	 * @throws Exception
+	 */
+	public static String uploadId(String username,String accessToken, byte[] contents, String ext) throws Exception {
+		String name = getImageIdKey(ImageType.auth,username, ext);
+		return upload(accessToken, name, contents);
+	}
+	/**
+	 * 上传资格证
+	 * @param username
+	 * @param contents
+	 * @param ext
+	 * @return
+	 * @throws Exception
+	 */
+	public static String uploadQ(String username,String accessToken, byte[] contents, String ext) throws Exception {
+		String name = getImageQKey(ImageType.auth,username, ext);
+		return upload(accessToken, name, contents);
+	}
+	
+	/**
+	 * 上传大B-用户头像
+	 * @param username
+	 * @param contents
+	 * @param ext
+	 * @return
+	 * @throws Exception
+	 */
+	public static String uploadDFavicon(String accessToken, byte[] contents, String ext) throws Exception {
+		String name = getImageDKey(ImageType.favicon, ext);
+		return upload(accessToken, name, contents);
+	}
+	
+	/**
+	 * 上传公司营业执照
+	 * @param accessToken
+	 * @param contents
+	 * @param ext
+	 * @return
+	 * @throws Exception
+	 */
+	public static String uploadBusinessLicence(String accessToken, byte[] contents, String ext) throws Exception {
+		String name = getImageDKey(ImageType.businessLicence, ext);
 		return upload(accessToken, name, contents);
 	}
 	
