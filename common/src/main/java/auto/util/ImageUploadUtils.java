@@ -131,6 +131,18 @@ public class ImageUploadUtils {
 		String name = getImageKey(ImageType.verify, ext);
 		return upload(accessToken, name, contents);
 	}
+	
+	/**
+	 * @param accessToken
+	 * @param contents
+	 * @param ext
+	 * @return
+	 * @throws Exception
+	 */
+	public static String uploadQrcode(String accessToken, byte[] contents, String ext) throws Exception {
+		String name = getImageKey(ImageType.qrcode, ext);
+		return upload(accessToken, name, contents);
+	}
 
 	public static String upload(String accessToken, String name, byte[] contents) throws Exception {
 		InputStream reader = new ByteArrayInputStream(contents);
@@ -279,7 +291,7 @@ public class ImageUploadUtils {
 		if(token == null) {
 			System.out.println("授权失败！");
 		}else {
-			File file = new File("/Users/wanglongtao/Desktop/1.jpg");
+			File file = new File("C:/d/other/logo.jpg");
 			String ext = ImageUtils.getSuffix(file.getName());
 			String url = uploadVerify(token, File2byte(file), ext);
 			System.out.println(url);
