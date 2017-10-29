@@ -1,5 +1,7 @@
 package auto.datamodel.controller.coupon;
 
+import auto.datamodel.controller.constants.JsonStatus;
+import auto.datamodel.dao.DealerCoupon;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -34,4 +36,22 @@ public class DealerCouponDetailedResult {
 	 * 代金券份数  如果代金券没有生成 则显示“未生成” 否则 显示份数
 	 */
 	private String couponNum;
+	
+	public DealerCouponDetailedResult(DealerCoupon dealerCoupon) {
+		// TODO Auto-generated constructor stub
+		this.id = dealerCoupon.getId();
+		this.seriesImg = ;
+		this.seriesName = ;
+		this.guidePrice = dealerCoupon.get;
+		this.commission = dealerCoupon.getCommission();
+		this.couponNum = fillCouponNum(dealerCoupon);
+	}
+
+	private String fillCouponNum(DealerCoupon dealerCoupon) {
+		// TODO Auto-generated method stub
+		if (dealerCoupon.getCouponNum() == null) {
+			return JsonStatus.couponEmpty;
+		}
+		return String.valueOf(dealerCoupon.getCouponNum());
+	}
 }

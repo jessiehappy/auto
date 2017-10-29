@@ -22,14 +22,14 @@ import auto.util.SerializeUtils;
  */
 @NoArgsConstructor
 @Entity
-@Table(name= "dealer_coupon")
-public class DealerCoupon implements java.io.Serializable, ICacheable{
+@Table(name = "dealer_coupon_test")
+public class DealerCouponTest implements java.io.Serializable, ICacheable{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 3508359657643502026L;
-	public static final DealerCoupon EMPTY = new DealerCoupon(0L);
+	public static final DealerCouponTest EMPTY = new DealerCouponTest(0L);
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	private Long id;
@@ -50,7 +50,7 @@ public class DealerCoupon implements java.io.Serializable, ICacheable{
 	private Long seriesId;
 	
 	/**
-	 * 优惠券数量  当优惠券没有生成时，显示"未生成"  否则，显示数量
+	 * 优惠券数量
 	 */
 	private Integer couponNum;
 	
@@ -83,120 +83,76 @@ public class DealerCoupon implements java.io.Serializable, ICacheable{
 	 * 优惠券状态 ：0-有效 1-无效
 	 */
 	private Integer status;
-	public DealerCoupon(Long id) {
+	public DealerCouponTest(Long id) {
 		this.id = id;
 	}
-
+	
 	public Long getId() {
 		return id;
 	}
-
-
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-
 	public String getDealerUsername() {
 		return dealerUsername;
 	}
-
-
 	public void setDealerUsername(String dealerUsername) {
 		this.dealerUsername = dealerUsername;
 	}
-
-
 	public Long getDealerSeriesId() {
 		return dealerSeriesId;
 	}
-
-
 	public void setDealerSeriesId(Long dealerSeriesId) {
 		this.dealerSeriesId = dealerSeriesId;
 	}
-
-
 	public Long getSeriesId() {
 		return seriesId;
 	}
-
-
 	public void setSeriesId(Long seriesId) {
 		this.seriesId = seriesId;
 	}
-
-
-	public Integer getCouponNum() {
+	public int getCouponNum() {
 		return couponNum;
 	}
-
-
 	public void setCouponNum(Integer couponNum) {
 		this.couponNum = couponNum;
 	}
-
-
-	public Integer getCommission() {
+	public int getCommission() {
 		return commission;
 	}
-
-
 	public void setCommission(Integer commission) {
 		this.commission = commission;
 	}
-
-
 	public Long getStartTime() {
 		return startTime;
 	}
-
-
 	public void setStartTime(Long startTime) {
 		this.startTime = startTime;
 	}
-
-
 	public Long getFinishedTime() {
 		return finishedTime;
 	}
-
-
 	public void setFinishedTime(Long finishedTime) {
 		this.finishedTime = finishedTime;
 	}
-
-
-	public Integer getLock() {
+	public int getLock() {
 		return lock;
 	}
-
-
 	public void setLock(Integer lock) {
 		this.lock = lock;
 	}
-
-
 	public Long getLockTime() {
 		return lockTime;
 	}
-
-
 	public void setLockTime(Long lockTime) {
 		this.lockTime = lockTime;
 	}
-
-
-	public Integer getStatus() {
+	public int getStatus() {
 		return status;
 	}
-
-
 	public void setStatus(Integer status) {
 		this.status = status;
 	}
-	
-
 	
 	@Override
 	public void writeFields(DataOutput out) throws IOException {

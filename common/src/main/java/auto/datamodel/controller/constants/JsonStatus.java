@@ -346,6 +346,7 @@ public class JsonStatus {
     
     //coupon 
     public static final String couponEmptyMsg = "还没有任何经销商发布代金券";
+    public static final String couponEmpty = "未生成";
     
     //default response
     
