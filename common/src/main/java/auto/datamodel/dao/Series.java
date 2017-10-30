@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import lombok.NoArgsConstructor;
 import auto.datamodel.cache.ICacheable;
@@ -25,8 +26,7 @@ public class Series implements java.io.Serializable, ICacheable{
 	 */
 	private static final long serialVersionUID = 6255822491681412912L;
 	public static final Series EMPTY = new Series(0L);
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
+	
 	private Long id;
 
 	/**
@@ -91,6 +91,9 @@ public class Series implements java.io.Serializable, ICacheable{
 	public Series(Long id) {
 		this.id = id;
 	}
+	
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
 	public Long getId() {
 		return id;
 	}
@@ -204,6 +207,8 @@ public class Series implements java.io.Serializable, ICacheable{
 		auditStatus = SerializeUtils.readInt(in);
 		saleStatus = SerializeUtils.readInt(in);
 	}
+	
+	@Transient
 	@Override
 	public boolean isEmpty() {
 		// TODO Auto-generated method stub

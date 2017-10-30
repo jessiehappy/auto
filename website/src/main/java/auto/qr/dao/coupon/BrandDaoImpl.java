@@ -12,7 +12,7 @@ import auto.datamodel.dao.Brand;
  * @author wangWentao
  *
  */
-@Repository("brandDao")
+@Repository
 public class BrandDaoImpl extends ReadonlyDaoImpl implements IBrandDao {
 
 	@Override

@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import lombok.NoArgsConstructor;
 import auto.datamodel.cache.ICacheable;
@@ -27,14 +28,18 @@ public class Coupon implements java.io.Serializable, ICacheable{
 	private static final long serialVersionUID = -3933685576158459316L;
 
 	public static final Coupon EMPTY = new Coupon(0L);
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
+	
 	private Long id;
 
 	/**
 	 * 优惠券编码
 	 */
 	private String couponCode;
+	
+	/**
+	 * 优惠券名称 品牌 + 车系
+	 */
+	private String couponName;
 	
 	/**
 	 * c端用户
@@ -69,6 +74,8 @@ public class Coupon implements java.io.Serializable, ICacheable{
 		this.id = id;
 	}
 	
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
 	public Long getId() {
 		return id;
 	}
@@ -117,12 +124,19 @@ public class Coupon implements java.io.Serializable, ICacheable{
 	public void setStatus(Integer status) {
 		this.status = status;
 	}
+	public String getCouponName() {
+		return couponName;
+	}
+	public void setCouponName(String couponName) {
+		this.couponName = couponName;
+	}
 	
 	@Override
 	public void writeFields(DataOutput out) throws IOException {
 		// TODO Auto-generated method stub
 		out.writeLong(id);
 		SerializeUtils.writeString(out, couponCode);
+		SerializeUtils.writeString(out, couponName);
 		SerializeUtils.writeString(out, username);
 		SerializeUtils.writeInt(out, coupon);
 		SerializeUtils.writeLong(out, createTime);
@@ -135,6 +149,7 @@ public class Coupon implements java.io.Serializable, ICacheable{
 		// TODO Auto-generated method stub
 		id = in.readLong();
 		couponCode = SerializeUtils.readString(in);
+		couponName = SerializeUtils.readString(in);
 		username = SerializeUtils.readString(in);
 		coupon = SerializeUtils.readInt(in);
 		createTime = SerializeUtils.readLong(in);
@@ -142,6 +157,8 @@ public class Coupon implements java.io.Serializable, ICacheable{
 		type = SerializeUtils.readInt(in);
 		status = SerializeUtils.readInt(in);
 	}
+	
+	@Transient
 	@Override
 	public boolean isEmpty() {
 		// TODO Auto-generated method stub

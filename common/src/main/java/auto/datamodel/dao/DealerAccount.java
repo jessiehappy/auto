@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import lombok.NoArgsConstructor;
 import auto.datamodel.cache.ICacheable;
@@ -25,8 +26,7 @@ public class DealerAccount implements java.io.Serializable, ICacheable{
 	 */
 	private static final long serialVersionUID = -7328355695251175868L;
 	public static final DealerAccount EMPTY = new DealerAccount(0L);
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
+	
 	private Long id;
 
 	/**
@@ -57,6 +57,8 @@ public class DealerAccount implements java.io.Serializable, ICacheable{
 		this.id = id;
 	}
 
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
 	public Long getId() {
 		return id;
 	}
@@ -114,6 +116,8 @@ public class DealerAccount implements java.io.Serializable, ICacheable{
 		alipayNumber = SerializeUtils.readString(in);
 		balance = SerializeUtils.readInt(in);
 	}
+	
+	@Transient
 	@Override
 	public boolean isEmpty() {
 		// TODO Auto-generated method stub

@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import lombok.NoArgsConstructor;
 import auto.datamodel.cache.ICacheable;
@@ -30,8 +31,7 @@ public class DealerCoupon implements java.io.Serializable, ICacheable{
 	 */
 	private static final long serialVersionUID = 3508359657643502026L;
 	public static final DealerCoupon EMPTY = new DealerCoupon(0L);
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
+	
 	private Long id;
 
 	/**
@@ -87,6 +87,8 @@ public class DealerCoupon implements java.io.Serializable, ICacheable{
 		this.id = id;
 	}
 
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
 	public Long getId() {
 		return id;
 	}
@@ -228,6 +230,7 @@ public class DealerCoupon implements java.io.Serializable, ICacheable{
 		lockTime = SerializeUtils.readLong(in);
 		status = SerializeUtils.readInt(in);
 	}
+	@Transient
 	@Override
 	public boolean isEmpty() {
 		// TODO Auto-generated method stub

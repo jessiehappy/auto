@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import lombok.NoArgsConstructor;
 import auto.datamodel.cache.ICacheable;
@@ -31,8 +32,6 @@ public class Category implements java.io.Serializable, ICacheable{
 
 	private static final Category EMPTY = new Category(0L);
 	
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
 	private Long id;
 	
 	/**
@@ -74,6 +73,8 @@ public class Category implements java.io.Serializable, ICacheable{
 		this.id = id;
 	}
 
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
 	public Long getId() {
 		return id;
 	}
@@ -179,6 +180,7 @@ public class Category implements java.io.Serializable, ICacheable{
 		status = SerializeUtils.readInt(in);
 	}
 
+	@Transient
 	@Override
 	public boolean isEmpty() {
 		// TODO Auto-generated method stub

@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import lombok.NoArgsConstructor;
 import auto.datamodel.cache.ICacheable;
@@ -26,8 +27,6 @@ public class CategoryBrand implements java.io.Serializable, ICacheable{
 	private static final long serialVersionUID = 8229117690771431925L;
 	private static final CategoryBrand EMPTY = new CategoryBrand(0L);
 	
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
 	private Long id;
 	
 	/**
@@ -64,6 +63,8 @@ public class CategoryBrand implements java.io.Serializable, ICacheable{
 		this.id = id;
 	}
 
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
 	public Long getId() {
 		return id;
 	}
@@ -144,6 +145,7 @@ public class CategoryBrand implements java.io.Serializable, ICacheable{
 		secondLevId= SerializeUtils.readLong(in);
 	}
 
+	@Transient
 	@Override
 	public boolean isEmpty() {
 		// TODO Auto-generated method stub

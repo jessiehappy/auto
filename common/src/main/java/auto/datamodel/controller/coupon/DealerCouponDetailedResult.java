@@ -39,12 +39,13 @@ public class DealerCouponDetailedResult {
 	
 	public DealerCouponDetailedResult(DealerCoupon dealerCoupon) {
 		// TODO Auto-generated constructor stub
-		/*this.id = dealerCoupon.getId();
-		this.seriesImg = ;
-		this.seriesName = ;
-		this.guidePrice = dealerCoupon.get;
+
+		this.id = dealerCoupon.getId();
+		this.seriesImg = null;
+		this.seriesName = null;
+		this.guidePrice = null;
 		this.commission = dealerCoupon.getCommission();
-		this.couponNum = fillCouponNum(dealerCoupon);*/
+		this.couponNum = fillCouponNum(dealerCoupon);
 	}
 
 	private String fillCouponNum(DealerCoupon dealerCoupon) {

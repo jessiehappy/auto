@@ -6,11 +6,11 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
 import auto.datamodel.controller.coupon.DealerCouponDetailedResult;
 import auto.datamodel.controller.coupon.DealerCouponResult;
 import auto.datamodel.dao.Brand;
-import auto.datamodel.dao.DealerUser;
 import auto.datamodel.dao.DealerCoupon;
 import auto.datamodel.dao.Series;
 import auto.qr.dao.coupon.IBrandDao;
@@ -22,6 +22,7 @@ import auto.qr.dao.coupon.ISeriesDao;
  * @author wangWentao
  *
  */
+@Service
 public class CouponServiceImpl implements ICouponService {
 
 	@Autowired
@@ -33,7 +34,6 @@ public class CouponServiceImpl implements ICouponService {
 	private ISeriesDao seriesDao;
 	
 	@Autowired
-	@Qualifier(value = "brandDao")
 	private IBrandDao brandDao;
 	
 	
@@ -64,5 +64,4 @@ public class CouponServiceImpl implements ICouponService {
 		dealerCouponResult.setCode(code);
 		dealerCouponResult.setItems(items);
 	}
-	
 };

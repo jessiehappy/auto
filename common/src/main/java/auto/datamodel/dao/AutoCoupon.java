@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import lombok.NoArgsConstructor;
 import auto.datamodel.cache.ICacheable;
@@ -30,14 +31,17 @@ public class AutoCoupon implements java.io.Serializable, ICacheable{
 	private static final long serialVersionUID = 1428447787648515171L;
 	public static final AutoCoupon EMPTY = new AutoCoupon(0L);
 
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
 	private Long id;
 	
 	/**
 	 * 优惠券ID
 	 */
 	private Long couponId;
+	
+	/**
+	 * 汽车优惠券二维码图片地址
+	 */
+	private String couponUrl;
 	
 	/**
 	 * c端用户电话号码
@@ -58,6 +62,8 @@ public class AutoCoupon implements java.io.Serializable, ICacheable{
 		this.id = id;
 	}
 	
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
 	public Long getId() {
 		return id;
 	}
@@ -98,11 +104,19 @@ public class AutoCoupon implements java.io.Serializable, ICacheable{
 		this.proxyCouponId = proxyCouponId;
 	}
 	
+	public String getCouponUrl() {
+		return couponUrl;
+	}
+
+	public void setCouponUrl(String couponUrl) {
+		this.couponUrl = couponUrl;
+	}
 	@Override
 	public void writeFields(DataOutput out) throws IOException {
 		// TODO Auto-generated method stub
 		out.writeLong(id);
 		SerializeUtils.writeLong(out, couponId);
+		SerializeUtils.writeString(out, couponUrl);
 		SerializeUtils.writeString(out, cTelephone);
 		SerializeUtils.writeLong(out, dealerCouponId);
 		SerializeUtils.writeLong(out, proxyCouponId);
@@ -113,11 +127,13 @@ public class AutoCoupon implements java.io.Serializable, ICacheable{
 		// TODO Auto-generated method stub
 		id = in.readLong();
 		couponId = SerializeUtils.readLong(in);
+		couponUrl = SerializeUtils.readString(in);
 		cTelephone = SerializeUtils.readString(in);
 		dealerCouponId = SerializeUtils.readLong(in);
 		proxyCouponId = SerializeUtils.readLong(in);
 	}
 
+	@Transient
 	@Override
 	public boolean isEmpty() {
 		// TODO Auto-generated method stub

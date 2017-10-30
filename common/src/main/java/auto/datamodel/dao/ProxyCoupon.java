@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import lombok.NoArgsConstructor;
 import auto.datamodel.cache.ICacheable;
@@ -25,8 +26,7 @@ public class ProxyCoupon implements java.io.Serializable, ICacheable{
 	 */
 	private static final long serialVersionUID = 39522776626328935L;
 	public static final ProxyCoupon EMPTY = new ProxyCoupon(0L);
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
+	
 	private Long id;
 
 	/**
@@ -61,6 +61,9 @@ public class ProxyCoupon implements java.io.Serializable, ICacheable{
 	public ProxyCoupon(Long id) {
 		this.id = id;
 	}
+	
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
 	public Long getId() {
 		return id;
 	}
@@ -125,6 +128,7 @@ public class ProxyCoupon implements java.io.Serializable, ICacheable{
 		proxyCommission = SerializeUtils.readInt(in);
 		seriesId = SerializeUtils.readLong(in);
 	}
+	@Transient
 	@Override
 	public boolean isEmpty() {
 		// TODO Auto-generated method stub
