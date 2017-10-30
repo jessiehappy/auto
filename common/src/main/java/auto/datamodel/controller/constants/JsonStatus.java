@@ -99,7 +99,15 @@ public class JsonStatus {
     
     public static final int PHONECODE_CODE_ERROR = 2016 ;
     
+    public static final int QRCODE_CONTENT_EMPTY = 2017 ;
     
+    public static final int QRCODE_EMPTY = 2018 ;
+    
+    //coupon
+    
+    public static final int COUPON_EMPTYM = 2019;
+    
+    public static final int USER_CODE_ERROT = 3000;
     
     
     //data not empty error msg 
@@ -144,6 +152,10 @@ public class JsonStatus {
     public static final String phonecode_msg_error= "手机验证码错误" ;
     
     public static final String notExitResource = "请求资源不存在";
+    
+    public static final String qrcodeContentEmptyMsg = "二维码内容为空";
+
+    public static final String qrcodeEmptyMsg = "二维码生成失败";
     
     //status msg
     public static final String successMsg = "success";
@@ -331,6 +343,10 @@ public class JsonStatus {
     public static final String duplicatedWechat = "该微信已绑定其他账号";
     
     public static final String unrentable = "该房间信息不完整，请先填写必要信息";
+    
+    //coupon 
+    public static final String couponEmptyMsg = "还没有任何经销商发布代金券";
+    public static final String couponEmpty = "未生成";
     
     //default response
     
