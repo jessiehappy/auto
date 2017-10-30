@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import auto.datamodel.dao.ProxyUser;
 import auto.datamodel.dao.ProxyAuth;
-import auto.datamodel.service.PUserResult;
+import auto.datamodel.service.ProxyUserResult;
 import auto.qr.dao.user.IProxyUserDao;
 import auto.util.ImageUploadUtils;
 import auto.util.ImageUtils;

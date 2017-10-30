@@ -6,7 +6,7 @@ import java.util.Map;
 import auto.datamodel.BasicJson;
 import auto.datamodel.dao.ProxyUser;
 import auto.datamodel.dao.ProxyAuth;
-import auto.datamodel.service.PUserResult;
+import auto.datamodel.service.ProxyUserResult;
 
 /**
  * 小B 代理商- server层

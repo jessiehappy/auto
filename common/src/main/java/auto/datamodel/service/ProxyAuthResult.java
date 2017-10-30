@@ -6,11 +6,11 @@ import auto.datamodel.dao.ProxyAuth;
 /**
  * 小B 认证信息 -server层返回信息
  */
-public class PAuthResult  {
+public class ProxyAuthResult  {
     
     public ProxyAuth user;
     
-    public PAuthResult(int errorCode, String errorMsg) {
+    public ProxyAuthResult(int errorCode, String errorMsg) {
         /*this.status = false;
         this.errorCode = errorCode;
         this.errorMsg = errorMsg;*/
@@ -25,7 +25,7 @@ public class PAuthResult  {
     public int status;//认证状态  0:未认证  1:审核中  2:未通过  3:已通过
     
     //返回用户信息
-    public PAuthResult (ProxyAuth user){
+    public ProxyAuthResult (ProxyAuth user){
     	this.realName=user.getRealName();
     	this.idNo=user.getIdNo();
     	this.frontImg=user.getFrontImg();
@@ -35,7 +35,7 @@ public class PAuthResult  {
     	this.latitude=user.getLatitude();
     }
     
-    public PAuthResult() {
+    public ProxyAuthResult() {
 		
 	}
 }

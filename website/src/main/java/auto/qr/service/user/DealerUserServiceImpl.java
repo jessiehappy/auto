@@ -17,7 +17,7 @@ import auto.datamodel.BasicJson;
 import auto.datamodel.dao.DealerAuth;
 import auto.datamodel.dao.DealerUser;
 import auto.datamodel.dao.ProxyAuth;
-import auto.datamodel.service.DUserResult;
+import auto.datamodel.service.DealerUserResult;
 import auto.qr.dao.user.IDealerUserDao;
 import auto.util.StringUtils;
 
@@ -84,7 +84,7 @@ public class DealerUserServiceImpl implements IDealerUserService {
 	           result=new BasicJson(JsonStatus.PHONECODE_CODE_ERROR, JsonStatus.phonecode_msg_error);
 			}else{
 				DealerUser user=createDUser(telephone,password);
-				DUserResult userResult=new DUserResult(user);
+				DealerUserResult userResult=new DealerUserResult(user);
 				result=new BasicJson(userResult);
 			}
 		}

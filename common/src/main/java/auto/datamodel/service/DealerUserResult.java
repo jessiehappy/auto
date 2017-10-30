@@ -4,11 +4,11 @@ import auto.datamodel.dao.DealerUser;
 /**
  * 大B 代理商 -server层返回信息
  */
-public class DUserResult  {
+public class DealerUserResult  {
     
     public DealerUser user;
     
-    public DUserResult(int errorCode, String errorMsg) {
+    public DealerUserResult(int errorCode, String errorMsg) {
         /*this.status = false;
         this.errorCode = errorCode;
         this.errorMsg = errorMsg;*/
@@ -20,7 +20,7 @@ public class DUserResult  {
     public int gender;//性别
     public int status;//认证状态  0:未认证  1:审核中  2:未通过  3:已通过
     //返回用户信息
-    public DUserResult (DealerUser user){
+    public DealerUserResult (DealerUser user){
     	this.telephone=user.getTelephone();
     	this.nickName=user.getNickName();
     	this.favicon=user.getFavicon();
@@ -29,7 +29,7 @@ public class DUserResult  {
     	
     }
     
-    public DUserResult() {
+    public DealerUserResult() {
 		
 	}
 }

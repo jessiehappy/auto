@@ -21,8 +21,8 @@ import auto.datamodel.controller.constants.JsonStatus;
 import auto.datamodel.dao.DealerAuth;
 import auto.datamodel.dao.DealerUser;
 import auto.datamodel.dao.ProxyAuth;
-import auto.datamodel.service.DUserResult;
-import auto.datamodel.service.PAuthResult;
+import auto.datamodel.service.DealerUserResult;
+import auto.datamodel.service.ProxyAuthResult;
 import auto.util.ImageUploadUtils;
 import auto.util.ImageUtils;
 import auto.util.JsonUtils;
@@ -163,7 +163,7 @@ public class DealerUserController {
 			if(user!=null){
 				if(password.equals(user.getPassword())){
 					//登录成功
-					DUserResult dUserResult=new DUserResult(user);
+					DealerUserResult dUserResult=new DealerUserResult(user);
 					result=new BasicJson(dUserResult);
 				}else{
 					//密码错误

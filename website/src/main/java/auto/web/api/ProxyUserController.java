@@ -20,7 +20,7 @@ import auto.util.ImageUploadUtils;
 import auto.util.ImageUtils;
 import auto.datamodel.controller.constants.JsonStatus;
 import auto.datamodel.dao.ProxyAuth;
-import auto.datamodel.service.PAuthResult;
+import auto.datamodel.service.ProxyAuthResult;
 import auto.util.JsonUtils;
 import auto.datamodel.BasicJson;
 import auto.util.WebUtils;
@@ -216,7 +216,7 @@ public class ProxyUserController {
 
 		try {
 			ProxyAuth pauth=puservice.createPAuth(telephone,realName,idNo,frontImg,qualification);
-			PAuthResult pAuthResult=new PAuthResult(pauth);
+			ProxyAuthResult pAuthResult=new ProxyAuthResult(pauth);
 			result=new BasicJson(pAuthResult);
 		} catch (Exception e) {
 			log.error(e);
