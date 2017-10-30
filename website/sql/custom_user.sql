@@ -16,10 +16,10 @@ Date: 2017-10-27 17:47:49
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for `c_user`
+-- Table structure for `custom_user`
 -- ----------------------------
-DROP TABLE IF EXISTS `c_user`;
-CREATE TABLE `c_user` (
+DROP TABLE IF EXISTS `custom_user`;
+CREATE TABLE `custom_user` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '用户表',
   `createTime` datetime NOT NULL COMMENT '创建时间',
   `modifyTime` datetime DEFAULT NULL COMMENT '修改时间',
@@ -35,5 +35,5 @@ CREATE TABLE `c_user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of c_user
+-- Records of custom_user
 -- ----------------------------
