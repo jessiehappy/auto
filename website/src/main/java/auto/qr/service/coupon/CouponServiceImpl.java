@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import auto.datamodel.controller.coupon.DealerCouponDetailedResult;
 import auto.datamodel.controller.coupon.DealerCouponResult;
 import auto.datamodel.dao.Brand;
-import auto.datamodel.dao.DUser;
+import auto.datamodel.dao.DealerUser;
 import auto.datamodel.dao.DealerCoupon;
 import auto.datamodel.dao.Series;
 import auto.qr.dao.coupon.IBrandDao;

@@ -2,13 +2,13 @@ package auto.datamodel.service;
 
 import java.math.BigDecimal;
 
-import auto.datamodel.dao.PAuth;
+import auto.datamodel.dao.ProxyAuth;
 /**
  * 小B 认证信息 -server层返回信息
  */
 public class PAuthResult  {
     
-    public PAuth user;
+    public ProxyAuth user;
     
     public PAuthResult(int errorCode, String errorMsg) {
         /*this.status = false;
@@ -25,7 +25,7 @@ public class PAuthResult  {
     public int status;//认证状态  0:未认证  1:审核中  2:未通过  3:已通过
     
     //返回用户信息
-    public PAuthResult (PAuth user){
+    public PAuthResult (ProxyAuth user){
     	this.realName=user.getRealName();
     	this.idNo=user.getIdNo();
     	this.frontImg=user.getFrontImg();

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import auto.datamodel.BasicJson;
 import auto.datamodel.controller.constants.JsonStatus;
 import auto.datamodel.controller.coupon.DealerCouponResult;
-import auto.datamodel.dao.DUser;
+import auto.datamodel.dao.DealerUser;
 import auto.qr.service.coupon.ICouponService;
 import auto.qr.service.user.IUserService;
 import auto.util.JsonUtils;
