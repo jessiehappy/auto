@@ -55,7 +55,7 @@ public class DealerCoupon implements java.io.Serializable, ICacheable{
 	private Integer couponNum;
 	
 	/**
-	 * 佣金 单位分
+	 * 佣金 单位分 not null
 	 */
 	private Integer commission;
 	
