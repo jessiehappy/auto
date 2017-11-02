@@ -50,6 +50,11 @@ public class DealerCoupon implements java.io.Serializable, ICacheable{
 	private Long seriesId;
 	
 	/**
+	 * 汽车商品名称
+	 */
+	private String titleName;
+	
+	/**
 	 * 优惠券数量  not null
 	 */
 	private Integer couponNum;
@@ -83,6 +88,10 @@ public class DealerCoupon implements java.io.Serializable, ICacheable{
 	 * 优惠券状态 ：0-有效 1-无效
 	 */
 	private Integer status;
+	/**
+	 * 优惠券核销人数
+	 */
+	private Integer verifiedNum;
 	public DealerCoupon(Long id) {
 		this.id = id;
 	}
@@ -198,7 +207,21 @@ public class DealerCoupon implements java.io.Serializable, ICacheable{
 		this.status = status;
 	}
 	
+	public String getTitleName() {
+		return titleName;
+	}
 
+	public void setTitleName(String titleName) {
+		this.titleName = titleName;
+	}
+	
+	public Integer getVerifiedNum() {
+		return verifiedNum;
+	}
+
+	public void setVerifiedNum(Integer verifiedNum) {
+		this.verifiedNum = verifiedNum;
+	}
 	
 	@Override
 	public void writeFields(DataOutput out) throws IOException {
@@ -207,6 +230,7 @@ public class DealerCoupon implements java.io.Serializable, ICacheable{
 		SerializeUtils.writeString(out, dealerUsername);
 		SerializeUtils.writeLong(out, dealerSeriesId);
 		SerializeUtils.writeLong(out, seriesId);
+		SerializeUtils.writeString(out, titleName);
 		SerializeUtils.writeInt(out, couponNum);
 		SerializeUtils.writeInt(out, commission);
 		SerializeUtils.writeLong(out, startTime);
@@ -214,6 +238,7 @@ public class DealerCoupon implements java.io.Serializable, ICacheable{
 		SerializeUtils.writeInt(out, lock);
 		SerializeUtils.writeLong(out, lockTime);
 		SerializeUtils.writeInt(out, status);
+		SerializeUtils.writeInt(out, verifiedNum);
 	}
 	@Override
 	public void readFields(DataInput in) throws IOException {
@@ -222,6 +247,7 @@ public class DealerCoupon implements java.io.Serializable, ICacheable{
 		dealerUsername = SerializeUtils.readString(in);
 		dealerSeriesId = SerializeUtils.readLong(in);
 		seriesId = SerializeUtils.readLong(in);
+		titleName = SerializeUtils.readString(in);
 		couponNum = SerializeUtils.readInt(in);
 		commission = SerializeUtils.readInt(in);
 		startTime = SerializeUtils.readLong(in);
@@ -229,6 +255,7 @@ public class DealerCoupon implements java.io.Serializable, ICacheable{
 		lock = SerializeUtils.readInt(in);
 		lockTime = SerializeUtils.readLong(in);
 		status = SerializeUtils.readInt(in);
+		verifiedNum = SerializeUtils.readInt(in);
 	}
 	@Transient
 	@Override

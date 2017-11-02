@@ -40,7 +40,7 @@ public class Category implements java.io.Serializable, ICacheable{
 	private String cName;
 	
 	/**
-	 * 类目级别 1：一级类目；2：二级类目；3：三级类目
+	 * 类目级别 1：一级类目(包括汽车，日用品等)；2：二级类目(包括进口车， 国产车等)；3：三级类目
 	 */
 	private Integer lev;
 	

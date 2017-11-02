@@ -19,4 +19,8 @@ public class CouponHomeBrandDetailedResult {
 	 * 品牌名称
 	 */
 	private String brandName;
+	/**
+	 * 排序数字
+	 */
+	private Integer sortNumber;
 }

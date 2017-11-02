@@ -6,6 +6,8 @@ import auto.datamodel.dao.Category;
 
 public interface ICategoryDao {
 
-	List<Category> getCategory();
+	List<Category> getCategory(Category category);
+
+	Category getCategoryByCnameAndLev(String automobile, int ordinal);
 
 }

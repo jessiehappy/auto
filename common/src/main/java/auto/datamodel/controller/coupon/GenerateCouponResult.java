@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 public class GenerateCouponResult {
 	
 	/**
-	 * 优惠券名称 品牌 + 车系
+	 * 优惠券名称 品牌 + 车系 + 汽车商品名称
 	 */
 	private String name;
 	/**
@@ -28,12 +28,12 @@ public class GenerateCouponResult {
 	
 	public GenerateCouponResult(DealerCoupon dealerCoupon, Series series,
 			Brand brand) {
-		this.name = fillName(series, brand);
+		this.name = fillName(series, brand, dealerCoupon);
 		this.offerDeadline = CommonUtils.getShortTimeFormat(new Date(dealerCoupon.getFinishedTime()));
 		this.commission = dealerCoupon.getCommission();
 	}
 
-	private String fillName(Series series, Brand brand) {
-		return brand.getBrandName() + series.getName();
+	private String fillName(Series series, Brand brand, DealerCoupon dealerCoupon) {
+		return brand.getBrandName() + series.getName() + dealerCoupon.getTitleName();
 	}
 }
