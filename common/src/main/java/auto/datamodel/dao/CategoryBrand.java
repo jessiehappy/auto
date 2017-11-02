@@ -58,6 +58,10 @@ public class CategoryBrand implements java.io.Serializable, ICacheable{
 	 * 平台二级目录ID
 	 */
 	private Long secondLevId;
+	/**
+	 * 平台三级目录ID
+	 */
+	private Long thirdLevId;
 	
 	public CategoryBrand(Long id) {
 		this.id = id;
@@ -121,6 +125,14 @@ public class CategoryBrand implements java.io.Serializable, ICacheable{
 		this.secondLevId = secondLevId;
 	}
 	
+	public Long getThirdLevId() {
+		return thirdLevId;
+	}
+
+	public void setThirdLevId(Long thirdLevId) {
+		this.thirdLevId = thirdLevId;
+	}
+	
 	@Override
 	public void writeFields(DataOutput out) throws IOException {
 		// TODO Auto-generated method stub
@@ -131,6 +143,7 @@ public class CategoryBrand implements java.io.Serializable, ICacheable{
 		SerializeUtils.writeLong(out, createTime);
 		SerializeUtils.writeLong(out, modifiedTime);
 		SerializeUtils.writeLong(out, secondLevId);
+		SerializeUtils.writeLong(out, thirdLevId);
 	}
 
 	@Override
@@ -143,6 +156,7 @@ public class CategoryBrand implements java.io.Serializable, ICacheable{
 		createTime = SerializeUtils.readLong(in);
 		modifiedTime = SerializeUtils.readLong(in);
 		secondLevId= SerializeUtils.readLong(in);
+		thirdLevId= SerializeUtils.readLong(in);
 	}
 
 	@Transient
