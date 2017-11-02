@@ -40,6 +40,7 @@ public class BrandServiceImpl implements IBrandService {
 		if(category == null) return null;
 		List<Category> categories = this.categoryDao.getCategory(category);//得到一级目录为汽车的二级目录(进口车、国产车等)
 		if(categories == null) return null;
+		sortCategory(categories);
 		Map<String, List<CouponHomeBrandDetailedResult>> map2Brand = new HashMap<String, List<CouponHomeBrandDetailedResult>>();
 		for(Category category2 : categories) {
 			List<CouponHomeBrandDetailedResult> items = new ArrayList<CouponHomeBrandDetailedResult>();
@@ -63,13 +64,24 @@ public class BrandServiceImpl implements IBrandService {
 			result.setItems(items.getValue());
 			results.add(result);
 		}
-		sortBrandResult(results);
 		return null;
 	}
 
-	private void sortBrandResult(List<CouponHomeBrandResult> results) {
-		// TODO Auto-generated method stub
-		
+	private void sortCategory(List<Category> categories) {
+		Collections.sort(categories, new Comparator<Category>() {
+
+			@Override
+			public int compare(Category o1, Category o2) {
+				if(o1.getSortNumber() > o2.getSortNumber()){
+					return 1;
+				}
+				if(o1.getSortNumber() < o2.getSortNumber()){
+					return -1;
+				}
+				
+				return 0;
+			}
+		});
 	}
 
 	private void sortBrand(List<CouponHomeBrandDetailedResult> items) {
