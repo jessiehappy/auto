@@ -50,7 +50,7 @@ public class DealerCoupon implements java.io.Serializable, ICacheable{
 	private Long seriesId;
 	
 	/**
-	 * 优惠券数量  当优惠券没有生成时，显示"未生成"  否则，显示数量
+	 * 优惠券数量  not null
 	 */
 	private Integer couponNum;
 	
@@ -65,12 +65,12 @@ public class DealerCoupon implements java.io.Serializable, ICacheable{
 	private Long startTime;
 	
 	/**
-	 * 优惠券失败时间
+	 * 优惠券失效时间
 	 */
 	private Long finishedTime;
 	
 	/**
-	 * 是否锁定 0：锁定 1：未锁定
+	 * 是否锁定 0：锁定 (大B不能修改) 1：未锁定(大B能修改)
 	 */
 	private Integer lock;
 	

@@ -7,26 +7,17 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import auto.dao.impl.ReadonlyDaoImpl;
+import auto.datamodel.DealerCouponStatus;
 import auto.datamodel.dao.DealerCoupon;
 
 @Repository("dealerCouponDao")
 public class DealerCouponDaoImpl extends ReadonlyDaoImpl implements IDealerCouponDao {
 
-	/**
-	 * 生效的优惠券
-	 */
-	private static final Integer COUPON_EFFECTIVE = 0;
-	/**
-	 * 未锁定的优惠券
-	 */
-	private static final Integer COUPON_UNLOCKED = 1;
-
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<DealerCoupon> listDealerCoupon() {
 		Criteria criteria = getSession().createCriteria(DealerCoupon.class);
-		criteria.add(Restrictions.eq("status", COUPON_EFFECTIVE))
-				.add(Restrictions.eq("lock", COUPON_UNLOCKED));
+		criteria.add(Restrictions.eq("status", DealerCouponStatus.COUPON_EFFECTIVE.ordinal()));
 //				.addOrder(Order.desc("commission"));//降序排列
 		List<DealerCoupon> dealerCoupon = criteria.list();
 		return dealerCoupon;
@@ -39,4 +30,13 @@ public class DealerCouponDaoImpl extends ReadonlyDaoImpl implements IDealerCoupo
 			System.out.println(dealerCoupon);
 		}
 	}*/
+
+	@Override
+	public DealerCoupon getDealerCouponById(Long id) {
+		// TODO Auto-generated method stub
+		Criteria criteria = getSession().createCriteria(DealerCoupon.class);
+		criteria.add(Restrictions.eq("id", id));
+		DealerCoupon dealerCoupon = (DealerCoupon) criteria.uniqueResult();
+		return dealerCoupon;
+	}
 }

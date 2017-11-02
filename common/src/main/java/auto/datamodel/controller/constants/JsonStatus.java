@@ -107,6 +107,15 @@ public class JsonStatus {
     
     public static final int COUPON_EMPTYM = 2019;
     
+    public static final int COUPONID_EMPTY = 2020;
+    
+    public static final int DEALER_GOODS_EMPTY = 2021;
+    
+    public static final int GENERATE_COUPON_ERROR = 2022;
+    
+    public static final int COUPONQUOTA_EMPTY  = 2023;
+    
+    
     public static final int USER_CODE_ERROT = 3000;
     
     
@@ -346,8 +355,18 @@ public class JsonStatus {
     
     //coupon 
     public static final String couponEmptyMsg = "还没有任何经销商发布代金券";
-    public static final String couponEmpty = "未生成";
     
+    public static final String couponQuota = "未生成";
+    
+    public static final String couponidEmpty = "代金券Id为空";
+    
+    public static final String couponEmpty = "车系或者品牌已下架！";
+    
+    public static final String dealerGoodsEmpty = "该商品已下架，不能生成代金券";
+    
+    public static final String generateCouponError = "代金券生成失败";
+    
+    public static final String couponquotaEmpty = "代金券额度为空！";
     //default response
     
     public static final String ERROR_STATUS = JsonUtils.toJson(

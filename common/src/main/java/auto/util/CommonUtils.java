@@ -37,6 +37,8 @@ public class CommonUtils {
     
     public static final SimpleDateFormat DAY_CHINESE_FORMAT = new SimpleDateFormat("yyyy年MM月dd日");
     
+    public static final SimpleDateFormat SHORT_TIME_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
+    
     public static boolean equals(Object o1, Object o2) {
         if (o1 == null && o2 == null) return true;
         if (o1 == null || o2 == null) return false;
@@ -98,6 +100,13 @@ public class CommonUtils {
         }
     }
     
+    public static String getShortTimeFormat(Date date) {
+        if (date == null) return null;
+        synchronized(SHORT_TIME_FORMAT) {
+            return SHORT_TIME_FORMAT.format(date);
+        }
+    }
+    
     public static Date getDateFromDay(String day) throws ParseException {
         if (day == null) return null;
         synchronized(DAY_FORMAT) {
@@ -122,6 +131,7 @@ public class CommonUtils {
     public static void main(String[] args) throws Exception {
         //System.out.println(getDateFromSecond("20160226212820"));
         System.out.println(getMillisecondFormat(new Date()));
+        System.out.println(getShortTimeFormat(new Date()));
     }
     
     public static int getDaysBetween(Date d1, Date d2) {

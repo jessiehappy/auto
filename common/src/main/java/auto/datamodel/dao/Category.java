@@ -50,7 +50,7 @@ public class Category implements java.io.Serializable, ICacheable{
 	private Long parentId;
 	
 	/**
-	 * 排序 如：进口车为1，国产车位2
+	 * 排序 
 	 */
 	private Integer sortNumber;
 	

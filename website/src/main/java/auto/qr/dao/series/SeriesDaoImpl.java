@@ -1,4 +1,4 @@
-package auto.qr.dao.coupon;
+package auto.qr.dao.series;
 
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;

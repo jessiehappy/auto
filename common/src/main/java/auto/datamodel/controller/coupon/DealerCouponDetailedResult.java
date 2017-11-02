@@ -1,13 +1,14 @@
 package auto.datamodel.controller.coupon;
 
 import auto.datamodel.controller.constants.JsonStatus;
+import auto.datamodel.dao.Brand;
 import auto.datamodel.dao.DealerCoupon;
+import auto.datamodel.dao.Series;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
  * 用于小b首页展示经销商代金券
- * @author wangWentao
  *
  */
 @Data
@@ -20,11 +21,11 @@ public class DealerCouponDetailedResult {
 	 */
 	private String seriesImg;
 	/**
-	 * 车系名称
+	 * 车系名称   品牌-系列
 	 */
 	private String seriesName;
 	/**
-	 * 车系指导价
+	 * 车系指导价 12.09-123.30
 	 */
 	private String guidePrice;
 	/**
@@ -33,26 +34,33 @@ public class DealerCouponDetailedResult {
 	private Integer commission;
 	
 	/**
-	 * 代金券份数  如果代金券没有生成 则显示“未生成” 否则 显示份数
+	 * 代金券额度  如果代金券没有生成 则显示“未生成” 否则 显示代金券额度
 	 */
-	private String couponNum;
+	private String couponQuota;
 	
-	public DealerCouponDetailedResult(DealerCoupon dealerCoupon) {
+	public DealerCouponDetailedResult(DealerCoupon dealerCoupon, Series series, Brand brand, Integer couponQuota) {
 		// TODO Auto-generated constructor stub
 
 		this.id = dealerCoupon.getId();
-		this.seriesImg = null;
-		this.seriesName = null;
-		this.guidePrice = null;
+		this.seriesImg = series.getSmallImg();
+		this.seriesName = fillSeriesName(series,brand);
+		this.guidePrice = fillGuidePrice(series);
 		this.commission = dealerCoupon.getCommission();
-		this.couponNum = fillCouponNum(dealerCoupon);
+		this.couponQuota = fillCouponQuota(couponQuota);
 	}
 
-	private String fillCouponNum(DealerCoupon dealerCoupon) {
-		// TODO Auto-generated method stub
-		if (dealerCoupon.getCouponNum() == null) {
-			return JsonStatus.couponEmpty;
+	private String fillGuidePrice(Series series) {
+		return series.getMinPrice() + "-" + series.getMaxPrice();
+	}
+
+	private String fillSeriesName(Series series, Brand brand) {
+		return brand.getBrandName() + "-" + series.getName();
+	}
+
+	private String fillCouponQuota(Integer couponQuota) {
+		if (couponQuota != null) {
+			return couponQuota.toString();
 		}
-		return String.valueOf(dealerCoupon.getCouponNum());
+		return JsonStatus.couponQuota;
 	}
 }
