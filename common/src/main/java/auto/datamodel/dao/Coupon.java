@@ -42,6 +42,11 @@ public class Coupon implements java.io.Serializable, ICacheable{
 	private String couponName;
 	
 	/**
+	 * 优惠券二维码地址
+	 */
+	private String couponUrl;
+	
+	/**
 	 * c端用户
 	 */
 	private String username;
@@ -130,13 +135,19 @@ public class Coupon implements java.io.Serializable, ICacheable{
 	public void setCouponName(String couponName) {
 		this.couponName = couponName;
 	}
-	
+	public String getCouponUrl() {
+		return couponUrl;
+	}
+	public void setCouponUrl(String couponUrl) {
+		this.couponUrl = couponUrl;
+	}
 	@Override
 	public void writeFields(DataOutput out) throws IOException {
 		// TODO Auto-generated method stub
 		out.writeLong(id);
 		SerializeUtils.writeString(out, couponCode);
 		SerializeUtils.writeString(out, couponName);
+		SerializeUtils.writeString(out, couponUrl);
 		SerializeUtils.writeString(out, username);
 		SerializeUtils.writeInt(out, coupon);
 		SerializeUtils.writeLong(out, createTime);
@@ -150,6 +161,7 @@ public class Coupon implements java.io.Serializable, ICacheable{
 		id = in.readLong();
 		couponCode = SerializeUtils.readString(in);
 		couponName = SerializeUtils.readString(in);
+		couponUrl = SerializeUtils.readString(in);
 		username = SerializeUtils.readString(in);
 		coupon = SerializeUtils.readInt(in);
 		createTime = SerializeUtils.readLong(in);
