@@ -28,7 +28,7 @@ public class HomeController {
 	@Autowired
 	private IProxyUserService proxyUserService;
 	
-	@RequestMapping( value = "/home", method = RequestMethod.POST )
+	@RequestMapping( value = "/proxy/home", method = RequestMethod.POST )
 	@ResponseBody
 	public String proxyHome(HttpServletRequest request, HttpServletResponse response) {
 		
