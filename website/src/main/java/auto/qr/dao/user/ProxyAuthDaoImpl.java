@@ -7,10 +7,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.hibernate.Criteria;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.CollectionUtils;
 
@@ -18,6 +17,7 @@ import auto.dao.impl.ReadonlyDaoImpl;
 import auto.datamodel.cache.CacheType;
 import auto.datamodel.cache.PrimitiveCacheable;
 import auto.datamodel.dao.ProxyAuth;
+import auto.datamodel.dao.Series;
 
 @Repository
 @SuppressWarnings("unchecked")
@@ -123,8 +123,11 @@ public class ProxyAuthDaoImpl extends ReadonlyDaoImpl implements IProxyAuthDao {
 
 	@Override
 	public ProxyAuth getPAuth(long id) {
-		// TODO Auto-generated method stub
-		return null;
+		ProxyAuth pAuth=null;
+	    pAuth = (ProxyAuth)getSession().createCriteria(ProxyAuth.class)
+					 .add(Restrictions.eq("id", id))
+					 .uniqueResult();
+		return pAuth;
 	}
 
     
