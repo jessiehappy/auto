@@ -23,7 +23,7 @@ public class OneDealerCouponResult {
 	 */
 	private String img;
 	/**
-	 * 商品名称 品牌 +系列
+	 * 商品名称 品牌 +系列+汽车名称
 	 */
 	private String name;
 	/**
@@ -58,7 +58,7 @@ public class OneDealerCouponResult {
 	public OneDealerCouponResult(DealerCoupon dealerCoupon, Series series,
 			Brand brand, Integer couponQuota, DealerAuth dealerAuth) {
 		this.img = series.getBigImg();
-		this.name = fillName(series, brand);
+		this.name = fillName(series, brand, dealerCoupon);
 		this.guidePrice = fillGuidePrice(series);
 		this.commission = dealerCoupon.getCommission();
 		this.couponQuota = couponQuota;
@@ -73,7 +73,7 @@ public class OneDealerCouponResult {
 		return series.getMinPrice() + "-" + series.getMaxPrice();
 	}
 
-	private String fillName(Series series, Brand brand) {
-		return brand.getBrandName() + series.getName();
+	private String fillName(Series series, Brand brand, DealerCoupon dealerCoupon) {
+		return brand.getBrandName() + series.getName() + dealerCoupon.getTitleName();
 	}
 }
