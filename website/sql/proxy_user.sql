@@ -29,7 +29,7 @@ CREATE TABLE `proxy_user` (
   `wechatName` varchar(200) DEFAULT NULL COMMENT '微信名称',
   `wechatFavicon` varchar(200) DEFAULT NULL COMMENT '微信头像',
   `token` varchar(200) DEFAULT NULL,
-  `imgFile` varchar(200) NOT NULL COMMENT '认证图像存放文件夹名称（默认username）',
+  `imgFile` varchar(200) DEFAULT NULL COMMENT '认证图像存放文件夹名称（默认username）',
   `openId` varchar(200) DEFAULT NULL,
   `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '认证状态  0:未认证  1:审核中  2:未通过  3:已通过',
   `dataStatus` tinyint(1) NOT NULL DEFAULT '0' COMMENT '数据状态 （0、正常   1、已删除）',

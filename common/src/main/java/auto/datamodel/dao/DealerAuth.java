@@ -22,8 +22,8 @@ import auto.util.SerializeUtils;
 
 @NoArgsConstructor
 @Entity
-@Table(name = "dealer_auth")
-public class DealerAuth implements java.io.Serializable, ICacheable{
+@Table(name = "dealer_auth")//implements java.io.Serializable, ICacheable
+public class DealerAuth {
 
 	/**
 	 * 
@@ -46,7 +46,7 @@ public class DealerAuth implements java.io.Serializable, ICacheable{
 		this.id=id;
 	}
     
-    @Override
+    /*@Override
 	public void writeFields(DataOutput out) throws IOException {
     	out.writeLong(id);
     	SerializeUtils.writeString(out, username);
@@ -77,7 +77,7 @@ public class DealerAuth implements java.io.Serializable, ICacheable{
 	public boolean isEmpty() {
 		 return EMPTY.getId().equals(id);
 	}
-	
+	*/
 	
 	@Id
 	@GeneratedValue(strategy = IDENTITY)

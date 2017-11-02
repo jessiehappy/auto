@@ -119,6 +119,12 @@ public interface IDealerUserService {
 	 * @return
 	 */
 	DealerAuth updateDAuthInfo(String username, Map<String, Object> info);
+	/**
+	 * 更新审核状态（dealer_auth/dealer_user表 ： 字段status）
+	 * @param username
+	 * @param info
+	 */
+	void updateDAuthStatus(String username, Map<String, Object> info);
 	
 	
 	

@@ -20,9 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import auto.datamodel.controller.constants.JsonStatus;
 import auto.datamodel.dao.DealerAuth;
 import auto.datamodel.dao.DealerUser;
-import auto.datamodel.dao.ProxyAuth;
 import auto.datamodel.service.DealerUserResult;
-import auto.datamodel.service.ProxyAuthResult;
 import auto.util.ImageUploadUtils;
 import auto.util.ImageUtils;
 import auto.util.JsonUtils;
@@ -322,7 +320,7 @@ public class DealerUserController {
 			String accessToken=ImageUploadUtils.getImageToken();
 			byte[] contents=file.getBytes();
 			String ext=ImageUtils.getSuffix(file.getName());
-			String favicon=ImageUploadUtils.uploadDFavicon(accessToken, contents, ext);
+			String favicon=ImageUploadUtils.uploadFavicon(accessToken, contents, ext);
 			Map<String, String> map=new HashMap<String, String>();
 			map.put("favicon", favicon);
 			result=new BasicJson(map);
@@ -334,7 +332,7 @@ public class DealerUserController {
 	}
 	
 	/**
-	 * 上传头像，返回头像地址
+	 * 上传营业执照，返回营业执照地址
 	 * @param request
 	 * @param response
 	 * @param file
@@ -349,7 +347,7 @@ public class DealerUserController {
 			String accessToken=ImageUploadUtils.getImageToken();
 			byte[] contents=file.getBytes();
 			String ext=ImageUtils.getSuffix(file.getName());
-			String businessLicence=ImageUploadUtils.uploadBusinessLicence(accessToken, contents, ext);
+			String businessLicence=ImageUploadUtils.uploadDealer(accessToken, contents, ext);
 			Map<String, String> map=new HashMap<String, String>();
 			map.put("businessLicence", businessLicence);
 			result=new BasicJson(map);
@@ -404,7 +402,7 @@ public class DealerUserController {
 		try {
 			Map<String, Object>Info=new HashMap<String, Object>();
 			Info.put("status", Integer.valueOf(status));
-			duserService.updateDAuthInfo(username, Info);
+			duserService.updateDAuthStatus(username, Info);
 			result=new BasicJson();
 		} catch (Exception e) {
 			log.error(e);

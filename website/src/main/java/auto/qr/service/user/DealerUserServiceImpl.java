@@ -154,4 +154,10 @@ public class DealerUserServiceImpl implements IDealerUserService {
 	public DealerAuth updateDAuthInfo(String username, Map<String, Object> info) {
 		return dauthService.updateInfo(username, info);
 	}
+
+	@Override
+	public void updateDAuthStatus(String username, Map<String, Object> info) {
+		DealerAuth dAuth=dauthService.updateInfo(username, info);
+		DealerUser dealer=duserService.updateInfo(username, info);
+	}
 }

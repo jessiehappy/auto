@@ -36,6 +36,7 @@ public class DealerAuthServiceImpl implements IDealerAuthService {
 			BigDecimal longitude,BigDecimal latitude) {
 		DealerAuth user=new DealerAuth();
 		
+		user.setUsername(username);
 		user.setTelephone(telephone);
 		user.setAddress(address);
 		user.setBusinessLicence(businessLicence);

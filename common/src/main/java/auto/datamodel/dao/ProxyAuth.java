@@ -1,7 +1,5 @@
 package auto.datamodel.dao;
-/**
- * 代理人认证表
- */
+
 import static javax.persistence.GenerationType.IDENTITY;
 
 import java.io.DataInput;
@@ -19,7 +17,9 @@ import javax.persistence.Transient;
 import lombok.NoArgsConstructor;
 import auto.datamodel.cache.ICacheable;
 import auto.util.SerializeUtils;
-
+/**
+ * 代理人认证表
+ */
 @NoArgsConstructor
 @Entity
 @Table(name = "proxy_auth")
@@ -36,6 +36,7 @@ public class ProxyAuth implements java.io.Serializable, ICacheable{
 	private Date createTime;//创建时间
 	private Date modifiedTime;//修改时间
 	private String username;//代理人用户名
+	private String openId;
 	private String realName;//真实姓名
 	private String idNo;//身份证号
 	private String frontImg;//身份证正面照
@@ -56,6 +57,7 @@ public class ProxyAuth implements java.io.Serializable, ICacheable{
     	SerializeUtils.writeDate(out, createTime);
     	SerializeUtils.writeDate(out, modifiedTime);
     	SerializeUtils.writeString(out, username);
+    	SerializeUtils.writeString(out, openId);
     	SerializeUtils.writeString(out, realName);
     	SerializeUtils.writeString(out, idNo);
     	SerializeUtils.writeString(out, frontImg);
@@ -74,6 +76,7 @@ public class ProxyAuth implements java.io.Serializable, ICacheable{
 		createTime=SerializeUtils.readDate(in);
 		modifiedTime=SerializeUtils.readDate(in);
 		username=SerializeUtils.readString(in);
+		openId=SerializeUtils.readString(in);
 		realName=SerializeUtils.readString(in);
 		idNo=SerializeUtils.readString(in);
 		frontImg=SerializeUtils.readString(in);
@@ -191,6 +194,13 @@ public class ProxyAuth implements java.io.Serializable, ICacheable{
 	public void setLatitude(BigDecimal latitude) {
 		this.latitude = latitude;
 	}
-	
+
+	public String getOpenId() {
+		return openId;
+	}
+
+	public void setOpenId(String openId) {
+		this.openId = openId;
+	}	
 	
 }

@@ -44,10 +44,11 @@ public class DealerUserServiceImpl implements IDealerUserService {
 		user.setPassword(password);
 		
 		//默认值
-		user.setStatus(AuthStatus.UNKNOWN.ordinal());
-		user.setDataStatus(Status.NORMAL.ordinal());
-		user.setGender(GenderType.UNKNOWN.ordinal());
-		user.setNickName(UserUtils.generateUsername());
+		user.setStatus(AuthStatus.UNKNOWN.ordinal());//默认认证状态
+		user.setDataStatus(Status.NORMAL.ordinal());//默认数据状态
+		user.setGender(GenderType.UNKNOWN.ordinal());//默认性别
+		user.setNickName(UserUtils.generateUsername());//默认昵称
+		user.setFavicon(DealerUser.DEFAULT_FAVICON);//默认头像
 		
 		duserDao.createDUser(user);
 		

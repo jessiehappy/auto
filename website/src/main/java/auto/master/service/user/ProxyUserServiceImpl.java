@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import auto.util.UserUtils;
+import auto.datamodel.AuthStatus;
 import auto.datamodel.Status;
 import auto.datamodel.dao.ProxyUser;
 import auto.master.dao.user.IProxyUserDao;
@@ -43,7 +44,10 @@ public class ProxyUserServiceImpl implements IProxyUserService {
 		user.setWechatName(wechatName);
 		user.setWechatFavicon(wechatFavicon);
 		user.setOpenId(openId);
-		user.setStatus(Status.NORMAL.ordinal());
+		//认证状态（0-未认证  1-审核中  2-未通过  3-已通过）
+		user.setStatus(AuthStatus.UNKNOWN.ordinal());
+		//数据状态（正常  或者  已删除）
+		user.setDataStatus(Status.NORMAL.ordinal());
 		
 		puserDao.createPUser(user);
 		

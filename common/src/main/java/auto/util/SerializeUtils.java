@@ -123,5 +123,4 @@ public class SerializeUtils {
         if ("@null".equals(str)) return null;
         return str;
     }
-
 }

@@ -20,7 +20,9 @@ import auto.util.ImageUploadUtils;
 import auto.util.ImageUtils;
 import auto.datamodel.controller.constants.JsonStatus;
 import auto.datamodel.dao.ProxyAuth;
+import auto.datamodel.dao.ProxyUser;
 import auto.datamodel.service.ProxyAuthResult;
+import auto.datamodel.service.ProxyUserResult;
 import auto.util.JsonUtils;
 import auto.datamodel.BasicJson;
 import auto.util.WebUtils;
@@ -82,7 +84,9 @@ public class ProxyUserController {
 		try {	
 			boolean flag=userService.verifyPhoneNum(openId, phoneNum);
 			if(flag){
-				result=new BasicJson();
+				//创建用户  或者  已存在用户  返回用户状态
+				ProxyUser pUser=puservice.createPUser(telephone, null, null, null, openId);
+				result=new BasicJson(new ProxyUserResult(pUser));
 			}else{
 				result=new BasicJson(JsonStatus.PHONECODE_CODE_ERROR, JsonStatus.phonecode_msg_error);
 			}
@@ -149,13 +153,13 @@ public class ProxyUserController {
 		String telephone = WebUtils.getNullIfEmpty(request, "telephone");
 
 		try {
-			//根据telephone,获取username作为认证信息文件夹名称
-			String username=puservice.getPUser(telephone).getUsername();
+			//根据telephone,获取openId作为认证信息文件夹名称
+			String username=puservice.getPUser(telephone).getOpenId();
 			//上传图片，返回图片地址
 			String accessToken=ImageUploadUtils.getImageToken();
 			byte[] contents=file.getBytes();
 			String ext=ImageUtils.getSuffix(file.getName());
-			String frontImg=ImageUploadUtils.uploadId(username,accessToken, contents, ext);
+			String frontImg=ImageUploadUtils.uploadProxy(username,accessToken, contents, ext);
 			Map<String, String> map=new HashMap<String, String>();
 			map.put("frontImg", frontImg);
 			result=new BasicJson(map);
@@ -180,13 +184,13 @@ public class ProxyUserController {
 		String telephone = WebUtils.getNullIfEmpty(request, "telephone");
 
 		try {
-			//根据telephone,获取username作为认证信息文件夹名称
-			String username=puservice.getPUser(telephone).getUsername();
+			//根据telephone,获取openId作为认证信息文件夹名称
+			String username=puservice.getPUser(telephone).getOpenId();
 			//上传图片，返回图片地址
 			String accessToken=ImageUploadUtils.getImageToken();
 			byte[] contents=file.getBytes();
 			String ext=ImageUtils.getSuffix(file.getName());
-			String qualification=ImageUploadUtils.uploadQ(username,accessToken, contents, ext);
+			String qualification=ImageUploadUtils.uploadProxy(username,accessToken, contents, ext);
 			Map<String, String> map=new HashMap<String, String>();
 			map.put("qualification", qualification);
 			result=new BasicJson(map);
@@ -213,9 +217,11 @@ public class ProxyUserController {
 		String idNo=WebUtils.getNullIfEmpty(request, "idNo");
 		String frontImg=WebUtils.getNullIfEmpty(request, "frontImg");
 		String qualification=WebUtils.getNullIfEmpty(request, "qualification");
+		String longitude=WebUtils.getNullIfEmpty(request, "longitude");//经度
+		String latitude=WebUtils.getNullIfEmpty(request, "latitude");//纬度
 
 		try {
-			ProxyAuth pauth=puservice.createPAuth(telephone,realName,idNo,frontImg,qualification);
+			ProxyAuth pauth=puservice.createPAuth(telephone,realName,idNo,frontImg,qualification,longitude,latitude);
 			ProxyAuthResult pAuthResult=new ProxyAuthResult(pauth);
 			result=new BasicJson(pAuthResult);
 		} catch (Exception e) {
@@ -239,7 +245,7 @@ public class ProxyUserController {
 		try {
 			Map<String, Object>Info=new HashMap<String, Object>();
 			Info.put("status", Integer.valueOf(status));
-			puservice.updatePAuthInfo(telephone, Info);
+			puservice.updatePAuthStatus(telephone, Info);
 			result=new BasicJson();
 		} catch (Exception e) {
 			log.error(e);

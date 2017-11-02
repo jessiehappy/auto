@@ -31,7 +31,7 @@ public class DealerUser implements java.io.Serializable, ICacheable{
 	 */
 	private static final long serialVersionUID = -1219375535782727216L;
 	
-	private  static final String DEFAULT_FAVICON="http://7u2hvg.com2.z0.glb.qiniucdn.com/107room_20170808104602591_QaWAD5/favicon/2017080816001108461.jpg";
+	public static final String DEFAULT_FAVICON="http://7u2hvg.com2.z0.glb.qiniucdn.com/107room_20170808104602591_QaWAD5/favicon/2017080816001108461.jpg";
 	
 	public static final String DEFAULT_PASSWORD = "5585812774057885129";
     
@@ -60,6 +60,7 @@ public class DealerUser implements java.io.Serializable, ICacheable{
     private DealerUser (Long id){
 		this.id=id;
 	}
+ 
     
     @Override
 	public void writeFields(DataOutput out) throws IOException {

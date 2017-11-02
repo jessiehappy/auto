@@ -18,15 +18,18 @@ public interface IProxyAuthService {
 	
     /**
      * 创建
+     * @param openId
+     * @param username
      * @param telephone
      * @param realName
      * @param idNo
      * @param frontImg
      * @param qualification
+     * @param latitude2 
      * @return
      */
-	ProxyAuth createPAuth(String telephone, String realName, String idNo,
-			String frontImg, String qualification);
+	ProxyAuth createPAuth(String openId, String username, String telephone, String realName, String idNo,
+			String frontImg, String qualification, String longitude, String latitude);
 	
 
 }

@@ -61,6 +61,13 @@ public interface IProxyUserService {
 	 * @return
 	 */
 	ProxyUser switchPUser(String telephone, String openId);
+	
+	/**
+	 * 条件查询       proxy_auth
+	 * @param username
+	 * @return
+	 */
+	ProxyAuth getPAuth(String username);
 	/**
 	 * 提交   代理人认证  申请(新建认证表)
 	 * @param telephone
@@ -70,13 +77,21 @@ public interface IProxyUserService {
 	 * @param qualification
 	 */
 	ProxyAuth createPAuth(String telephone, String realName, String idNo,
-			String frontImg, String qualification);
+			String frontImg, String qualification, String longitude, String latitude);
 	/**
 	 * 审核  代理人认证   （更新认证表）
 	 * @param username
 	 * @param info
 	 */
 	ProxyAuth updatePAuthInfo(String username, Map<String, Object> info);
+	/**
+	 * 审核代理人认证 （更新proxy_user/proxy_auth表中 字段status）
+	 * @param username
+	 * @param info
+	 */
+	void updatePAuthStatus(String telephone, Map<String, Object> info);
+	
+
 	
     
 }

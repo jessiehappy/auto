@@ -21,16 +21,16 @@ public class DealerAuthDaoImpl extends DaoImpl implements IDealerAuthDao {
 	private Criterion getUsernameCriterion(Collection<String> usernames) {
 		return Restrictions.or(
 				Restrictions.in("username", usernames),
-				Restrictions.in("realName", usernames),
-				Restrictions.in("idNo", usernames)
+				Restrictions.in("telephone", usernames),
+				Restrictions.in("company", usernames)
      );
 	}
 	
 	private Criterion getUsernameCriterion(String username) {
 		return Restrictions.or(
 				Restrictions.eq("username", username),
-				Restrictions.eq("realName", username),
-				Restrictions.eq("idNo", username)
+				Restrictions.eq("telephone", username),
+				Restrictions.eq("company", username)
      );
 	}
 	
@@ -47,6 +47,7 @@ public class DealerAuthDaoImpl extends DaoImpl implements IDealerAuthDao {
         }
     }
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public DealerAuth getDAuth(String username) {
 		List<DealerAuth> users = (List<DealerAuth>) getSession().createCriteria(DealerAuth.class)

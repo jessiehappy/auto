@@ -19,9 +19,9 @@ public class UserServiceImpl implements IUserService {
     
     private static final long USER_EXPIRE_TIME = 1000l * 60 * 60 * 24 * 7;
     
-    private static final int PHONENUM_EXPIRE_TIME = 60 * 2 ;//短信验证码  过期时间  2分钟
+    private static final int PHONENUM_EXPIRE_TIME =3600* 60 * 2 ;//短信验证码  过期时间  2分钟
     
-    private static final int PICCODE_EXPIER_TIEM = 60*2 ;//图片验证码 过期时间 30秒
+    private static final int PICCODE_EXPIER_TIEM =3600*  60 * 2 ;//图片验证码 过期时间 30秒
 
 	@Override
 	public boolean sendPhoneNum(String telephone,String openId) {

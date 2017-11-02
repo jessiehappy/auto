@@ -24,6 +24,7 @@ CREATE TABLE `proxy_auth` (
   `createTime` datetime NOT NULL COMMENT '创建时间',
   `modifiedTime` datetime DEFAULT NULL COMMENT '修改时间',
   `username` varchar(200) NOT NULL COMMENT '用户名',
+  `openId` varchar(200) NOT NULL,
   `realName` varchar(200) NOT NULL COMMENT '真实姓名',
   `idNo` varchar(50) NOT NULL COMMENT '身份证号码',
   `frontImg` varchar(200) NOT NULL COMMENT '身份证正面照',

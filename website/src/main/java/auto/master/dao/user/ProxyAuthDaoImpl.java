@@ -2,7 +2,6 @@ package auto.master.dao.user;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -10,7 +9,6 @@ import org.apache.commons.lang.Validate;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
-import org.springframework.util.CollectionUtils;
 
 import auto.dao.impl.DaoImpl;
 import auto.datamodel.cache.CacheType;
@@ -47,7 +45,7 @@ public class ProxyAuthDaoImpl extends DaoImpl implements IProxyAuthDao {
         	cacheManager.mdeprecate(CacheType.username2Id, usernames);
         }
     }
-
+    @SuppressWarnings("unchecked")
 	@Override
 	public ProxyAuth getPAuth(String username) {
 		List<ProxyAuth> users = (List<ProxyAuth>) getSession().createCriteria(ProxyAuth.class)
@@ -68,21 +66,6 @@ public class ProxyAuthDaoImpl extends DaoImpl implements IProxyAuthDao {
         }
         return minUser;
 	}
-
-
-	@Override
-	public List<ProxyAuth> getPAuths(Collection<String> usernames) {
-		if (CollectionUtils.isEmpty(usernames)) {
-            return Collections.emptyList();
-        }
-        List<ProxyAuth> results = (List<ProxyAuth>)getSession().createCriteria(ProxyAuth.class)
-                .add(getUsernameCriterion(usernames))
-                .list();
-        return results;
-	}
-
-	
-
 	@Override
 	public ProxyAuth createPAuth(ProxyAuth user) {
 		Validate.notNull(user);
