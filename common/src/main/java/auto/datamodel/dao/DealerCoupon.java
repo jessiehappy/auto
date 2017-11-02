@@ -50,6 +50,11 @@ public class DealerCoupon implements java.io.Serializable, ICacheable{
 	private Long seriesId;
 	
 	/**
+	 * 汽车商品名称
+	 */
+	private String titleName;
+	
+	/**
 	 * 优惠券数量  not null
 	 */
 	private Integer couponNum;
@@ -198,7 +203,13 @@ public class DealerCoupon implements java.io.Serializable, ICacheable{
 		this.status = status;
 	}
 	
+	public String getTitleName() {
+		return titleName;
+	}
 
+	public void setTitleName(String titleName) {
+		this.titleName = titleName;
+	}
 	
 	@Override
 	public void writeFields(DataOutput out) throws IOException {
@@ -207,6 +218,7 @@ public class DealerCoupon implements java.io.Serializable, ICacheable{
 		SerializeUtils.writeString(out, dealerUsername);
 		SerializeUtils.writeLong(out, dealerSeriesId);
 		SerializeUtils.writeLong(out, seriesId);
+		SerializeUtils.writeString(out, titleName);
 		SerializeUtils.writeInt(out, couponNum);
 		SerializeUtils.writeInt(out, commission);
 		SerializeUtils.writeLong(out, startTime);
@@ -222,6 +234,7 @@ public class DealerCoupon implements java.io.Serializable, ICacheable{
 		dealerUsername = SerializeUtils.readString(in);
 		dealerSeriesId = SerializeUtils.readLong(in);
 		seriesId = SerializeUtils.readLong(in);
+		titleName = SerializeUtils.readString(in);
 		couponNum = SerializeUtils.readInt(in);
 		commission = SerializeUtils.readInt(in);
 		startTime = SerializeUtils.readLong(in);

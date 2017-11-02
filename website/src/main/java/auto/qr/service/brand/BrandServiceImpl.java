@@ -25,8 +25,8 @@ public class BrandServiceImpl implements IBrandService {
 	
 	@Override
 	public List<CouponHomeBrandResult> getCouponHomeBrand() {
-		List<Brand> brands = this.brandDao.getBrand();
-		List<Category> categories = this.categoryDao.getCategory();
+//		List<Brand> brands = this.brandDao.getBrand();
+		List<Category> categories = this.categoryDao.getCategory();//得到一级目录为汽车的二级目录
 		Map<String, CouponHomeBrandDetailedResult> map2Brand = new HashMap<String, CouponHomeBrandDetailedResult>();
 		return null;
 	}
