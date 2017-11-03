@@ -28,7 +28,7 @@ public class CouponHomeController {
 	@Autowired
 	private IBrandService brandService;
 	
-	@RequestMapping(value = "/couponHome", method = RequestMethod.POST)
+	@RequestMapping(value = "/coupon/home", method = RequestMethod.POST)
 	public String couponHome(HttpServletRequest request, HttpServletResponse response) {
 		BasicJson result = null;
 		String telephone = WebUtils.getNullIfEmpty(request, "telephone");//小b的电话

@@ -36,7 +36,7 @@ public class CouponController {
 	@Qualifier(value = "masterCouponService")
 	private auto.master.service.coupon.ICouponService masterCouponService;
 	
-	@RequestMapping(value = "/showDetails", method = RequestMethod.POST)
+	@RequestMapping(value = "/show/details", method = RequestMethod.POST)
 	@ResponseBody
 	public String showDetails(HttpServletRequest request, HttpServletResponse response) {
 		BasicJson result = null;
@@ -69,7 +69,7 @@ public class CouponController {
 		return JsonUtils.toJson(result);
 	}
 	
-	@RequestMapping(value = "/clickGenerateCoupon", method = RequestMethod.POST)
+	@RequestMapping(value = "/click/generate/coupon", method = RequestMethod.POST)
 	@ResponseBody
 	public String clickGenerateCoupon(HttpServletRequest request, HttpServletResponse response) {
 		BasicJson result = null;
@@ -92,7 +92,7 @@ public class CouponController {
 		return JsonUtils.toJson(result);
 	}
 	
-	@RequestMapping(value = "/generateCoupon", method = RequestMethod.POST)
+	@RequestMapping(value = "/generate/coupon", method = RequestMethod.POST)
 	@ResponseBody
 	public String generateCoupon(HttpServletRequest request, HttpServletResponse response) {
 		BasicJson result = null;
