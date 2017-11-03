@@ -1,8 +1,10 @@
 package auto.qr.service.wx;
 
+import org.springframework.stereotype.Service;
+
 import auto.util.HttpUtils;
 import auto.util.JsonUtils;
-
+@Service
 public class WXServiceImpl implements WXService {
 	
 	private final static String appid = "";
