@@ -19,9 +19,4 @@ public class CouponHomeBrandResult {
 	 */
 	private List<CouponHomeBrandDetailedResult> items = 
 			new ArrayList<CouponHomeBrandDetailedResult>();
-	
-	/**
-	 * 排序
-	 */
-	private Integer sortNumber;
 }
