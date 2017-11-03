@@ -147,7 +147,7 @@
 
 **请求示例**：https://api.dl.com/user/proxy/verifyPhoneNum
 
-**接口备注**：实现短信验证码验证请求
+**接口备注**：实现短信验证码验证请求，返回用户的基本信息
 
 ##### 请求参数说明
 
@@ -165,6 +165,9 @@
 |:-------------:|:----------:|:--------:|
 | errCode      | string | 数据请求状态   |
 | msg 		   | string | 返回请求状态的消息|
+| telephone | string | 是    | 手机号码 |
+| openId | string | 是    | 微信用户标识 |
+| status | string | 是    | 认证状态 0-未认证 1-审核中 2-未通过 3-已通过 |
 
 ##### 返回结果
 
@@ -177,6 +180,11 @@
 {
 	"errCode":"200",
 	"msg":"sucess"
+    "data":{
+    	"telephone":"XXXX",
+        "openId":"XXXX",
+        "status":0
+    }
 }
 失败：
 {
@@ -379,6 +387,8 @@
 | idNo | string | 是       | 身份证号 |
 | frontImg | string | 是    | 身份证正面图片地址 |
 | qualification | string | 是    | 资格证图片地址 |
+| longitude		|String   |是	|	经度		|
+|  latitude 	|String 	|是	|	纬度		|
 
 ##### 返回信息说明
 - - -
@@ -391,6 +401,8 @@
 | idNo	  | string | 返回身份证号 |
 | frontImg| string | 返回身份证正面照地址 |
 | qualification| string | 返回资格证照地址  |
+| longitude| string | 返回经度数值|
+| latitude| string | 返回纬度数值  |
 | status	| int | 认证状态  0:未认证 1:审核中  2:未通过 3:已通过 |
 
 ##### 返回结果
@@ -408,6 +420,8 @@
        "idNo":"XXXX",
        "frontImg":"XXXX",
        "qualification":"XXXX",
+        "longitude": 123.123456,
+    	"latitude": 23.654321,
        "status":0
     }
 }
@@ -713,6 +727,7 @@
 |:-------------:|:----------:|:--------:|
 | errCode      | string | 数据请求状态   |
 | msg 		   | string | 返回请求状态的消息|
+| username | string | 账号|
 | telephone	 | string | 电话号码 |
 | nickName	 | string |  昵称   |
 | favicon 	| string |  头像地址  |
@@ -730,6 +745,7 @@
   "errCode": 200,
   "msg": "success",
   "data": {
+    "username":"XXXX",
     "telephone": "XXXX"，
     "nickName": "XXXX"，
     "favicon": "XXXX"，
@@ -943,7 +959,7 @@
 ```
 ### 12. 上传头像
 
-**接口地址**：/user/dealer/euploadFavicon
+**接口地址**：/user/dealer/uploadFavicon
 
 **返回参数**：json
 
@@ -979,6 +995,143 @@
   "data":{
   	"favicon":"XXXX"
   }
+}
+```
+### 13. 上传--公司营业执照
+
+**接口地址**：/user/dealer/uploadBusinessLicence
+
+**返回参数**：json
+
+**请求方式**：http
+
+**请求示例**：https://api.dl.com/user/dealer/uploadBusinessLicence
+
+**接口备注**：上传公司营业执照，返回营业执照图片地址
+
+##### 请求参数说明
+
+- - -
+
+| 名称        | 类型          | 必填       | 说明       |
+|:-----------:|:-------------:|:----------:|:--------:|
+| file | File| 是    | 上传的头像文件|
+
+##### 返回信息说明
+- - -
+| 名称        | 类型        | 说明       |
+|:-------------:|:----------:|:--------:|
+| errCode      | string | 数据请求状态   |
+| msg 		   | string | 返回请求状态的消息|
+| businessLicence| string | 返回上传营业执照地址|
+##### 返回结果
+---
+
+*** json示例 ***
+```json
+{
+  "errCode": 200,
+  "msg": "success",
+  "data":{
+  	"businessLicence":"XXXX"
+  }
+}
+```
+### 14. 提交--供应商资格认证信息
+
+**接口地址**：/user/dealer/submitDUser
+
+**返回参数**：json
+
+**请求方式**：http
+
+**请求示例**：https://api.dl.com/user/dealer/submitDUser
+
+**接口备注**：提交供应商资格认证信息，返回供应商信息
+
+##### 请求参数说明
+
+- - -
+
+| 名称        | 类型          | 必填       | 说明       |
+|:-----------:|:-------------:|:----------:|:--------:|
+| username | String| 是    | 账号|
+| telephone | String| 是    | 公司电话|
+| address | String| 是    | 公司地址 |
+| company | String| 是    | 公司名称 |
+| businessLicence | String| 是    | 上传营业执照地址 |
+| longitude | String| 是    | 公司地址之经度|
+| latitude | String| 是    | 公司地址之纬度|
+
+##### 返回信息说明
+- - -
+| 名称        | 类型        | 说明       |
+|:-------------:|:----------:|:--------:|
+| errCode      | string | 数据请求状态   |
+| msg 		   | string | 返回请求状态的消息|
+| username | String| 是    | 账号|
+| telephone | String| 是    | 公司电话|
+| address | String| 是    | 公司地址 |
+| company | String| 是    | 公司名称 |
+| businessLicence | String| 是    | 上传营业执照地址 |
+| longitude | String| 是    | 公司地址之经度|
+| latitude | String| 是    | 公司地址之纬度|
+##### 返回结果
+---
+
+*** json示例 ***
+```json
+{
+  "errCode": 200,
+  "msg": "success",
+  "data": {
+    "id": 1,
+    "username": "auto_20171101110643874_MfVbv21",
+    "telephone": "XXXX",
+    "address": "北京市东城区112号",
+    "company": "北京软件开发公司",
+    "businessLicence":"http://XXXX/img/dealerAuth/2017110111154045316.jpg",
+    "longitude": 23.12345,
+    "latitude": 123.23456,
+    "status": 1
+  }
+}
+```
+### 14. 审核供应商提供的认证信息
+
+**接口地址**：/user/dealer/aduitDUser
+
+**返回参数**：json
+
+**请求方式**：http
+
+**请求示例**：https://api.dl.com/user/dealer/auditDUser
+
+**接口备注**：审核供应商提供的认证信息
+
+##### 请求参数说明
+
+- - -
+
+| 名称        | 类型          | 必填       | 说明       |
+|:-----------:|:-------------:|:----------:|:--------:|
+| username | String | 是    | 账号|
+| status | String | 是    | 认证状态： 0-未认证 1-审核中 2-未通过  3-已通过|
+
+##### 返回信息说明
+- - -
+| 名称        | 类型        | 说明       |
+|:-------------:|:----------:|:--------:|
+| errCode      | string | 数据请求状态   |
+| msg 		   | string | 返回请求状态的消息|
+##### 返回结果
+---
+
+*** json示例 ***
+```json
+{
+  "errCode": 200,
+  "msg": "success"
 }
 ```
 
