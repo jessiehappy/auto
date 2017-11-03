@@ -7,9 +7,9 @@ import auto.util.JsonUtils;
 @Service
 public class WXServiceImpl implements WXService {
 	
-	private final static String appid = "";
+	private final static String appid = "wx20ca2305a3b601f1";
 	
-	private final static String secret = "";
+	private final static String secret = "111fbfb07fd07dc39bef0791dfe27597";
 	
 	@Override
 	public String getOpenId(String code) throws Exception {

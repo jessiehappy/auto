@@ -6,6 +6,7 @@ import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -79,7 +80,7 @@ public class AutoCoupon implements java.io.Serializable, ICacheable{
 	public void setCouponId(Long couponId) {
 		this.couponId = couponId;
 	}
-
+	@Column(name="c_telephone")
 	public String getcTelephone() {
 		return cTelephone;
 	}

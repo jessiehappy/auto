@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import auto.datamodel.BasicJson;
+import auto.datamodel.controller.coupon.CustomCouponList;
 import auto.datamodel.dao.CustomUser;
 
 
@@ -43,5 +44,11 @@ public interface ICustomUserService {
 	 * @return
 	 */
 	CustomUser updateInfo(String username,Map<String, Object> Info);
+	/**
+	 * 根据username查询我的代金券
+	 * @param username
+	 * @return
+	 */
+	List<CustomCouponList> getMycoupons(String username);
     
 }

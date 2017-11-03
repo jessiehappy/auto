@@ -5,5 +5,7 @@ import auto.datamodel.dao.AutoCoupon;
 public interface IAutoCouponDao {
 
 	AutoCoupon getAutoCouponById(Long id);
+	
+	AutoCoupon getAutoCoupon(Long id);
 
 }

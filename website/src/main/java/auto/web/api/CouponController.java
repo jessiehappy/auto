@@ -10,14 +10,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import auto.datamodel.AuthStatus;
 import auto.datamodel.BasicJson;
-import auto.datamodel.ProxyUserIdentityType;
 import auto.datamodel.controller.constants.JsonStatus;
 import auto.datamodel.controller.coupon.GenerateCouponResult;
 import auto.datamodel.controller.coupon.OneDealerCouponResult;
 import auto.datamodel.dao.ProxyUser;
 import auto.qr.service.coupon.ICouponService;
-
 import auto.qr.service.user.IProxyUserService;
 import auto.util.JsonUtils;
 import auto.util.WebUtils;
@@ -52,9 +51,9 @@ public class CouponController {
 		}
 		String telephone = WebUtils.getNullIfEmpty(request, "telephone");
 		int identifyStatus =  proxyUserService.identifyPUser(telephone);
-		if (identifyStatus == ProxyUserIdentityType.UNVERIFIED.ordinal() 
-				|| identifyStatus == ProxyUserIdentityType.UNDERREVIEW.ordinal() 
-				|| identifyStatus == ProxyUserIdentityType.NOTPASS.ordinal()) {
+		if (identifyStatus == AuthStatus.UNKNOWN.ordinal() 
+				|| identifyStatus == AuthStatus.AUDIT.ordinal() 
+				|| identifyStatus == AuthStatus.AUDIT_FAILURE.ordinal()) {
 			result = new BasicJson(JsonStatus.UNVERIFIED_CODE, JsonStatus.grantCodeExpired, null);
 			return JsonUtils.toJson(result);
 		}
@@ -103,9 +102,9 @@ public class CouponController {
 		}
 		String telephone = WebUtils.getNullIfEmpty(request, "telephone");//小b
 		int identifyStatus =  proxyUserService.identifyPUser(telephone);
-		if (identifyStatus == ProxyUserIdentityType.UNVERIFIED.ordinal() 
-				|| identifyStatus == ProxyUserIdentityType.UNDERREVIEW.ordinal() 
-				|| identifyStatus == ProxyUserIdentityType.NOTPASS.ordinal()) {
+		if (identifyStatus == AuthStatus.UNKNOWN.ordinal() 
+				|| identifyStatus == AuthStatus.AUDIT.ordinal() 
+				|| identifyStatus == AuthStatus.AUDIT_FAILURE.ordinal()) {
 			result = new BasicJson(JsonStatus.UNVERIFIED_CODE, JsonStatus.grantCodeExpired, null);
 			return JsonUtils.toJson(result);
 		}

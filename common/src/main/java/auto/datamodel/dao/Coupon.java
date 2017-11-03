@@ -75,6 +75,11 @@ public class Coupon implements java.io.Serializable, ICacheable{
 	 * 优惠券使用状态 0：未使用 1：已使用 2：已过期
 	 */
 	private Integer status;
+	/**
+	 * 使用券用户的电话号码
+	 */
+	private String telephone;
+	
 	public Coupon(Long id) {
 		this.id = id;
 	}
@@ -141,6 +146,14 @@ public class Coupon implements java.io.Serializable, ICacheable{
 	public void setCouponUrl(String couponUrl) {
 		this.couponUrl = couponUrl;
 	}
+	public String getTelephone() {
+		return telephone;
+	}
+
+	public void setTelephone(String telephone) {
+		this.telephone = telephone;
+	}
+	
 	@Override
 	public void writeFields(DataOutput out) throws IOException {
 		// TODO Auto-generated method stub
@@ -154,6 +167,7 @@ public class Coupon implements java.io.Serializable, ICacheable{
 		SerializeUtils.writeLong(out, endedTime);
 		SerializeUtils.writeInt(out, type);
 		SerializeUtils.writeInt(out, status);
+		SerializeUtils.writeString(out, "telephone");
 	}
 	@Override
 	public void readFields(DataInput in) throws IOException {
@@ -168,6 +182,7 @@ public class Coupon implements java.io.Serializable, ICacheable{
 		endedTime = SerializeUtils.readLong(in);
 		type = SerializeUtils.readInt(in);
 		status = SerializeUtils.readInt(in);
+		telephone=SerializeUtils.readString(in);
 	}
 	
 	@Transient
@@ -176,4 +191,6 @@ public class Coupon implements java.io.Serializable, ICacheable{
 		// TODO Auto-generated method stub
 		return EMPTY.getId().equals(id);
 	}
+
+	
 }

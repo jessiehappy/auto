@@ -92,6 +92,11 @@ public class DealerCoupon implements java.io.Serializable, ICacheable{
 	 * 优惠券核销人数
 	 */
 	private Integer verifiedNum;
+	/**
+	 * 供应商输入的商品价格指导信息
+	 */
+	private String priceStr;
+	
 	public DealerCoupon(Long id) {
 		this.id = id;
 	}
@@ -223,6 +228,14 @@ public class DealerCoupon implements java.io.Serializable, ICacheable{
 		this.verifiedNum = verifiedNum;
 	}
 	
+	public String getPriceStr() {
+		return priceStr;
+	}
+
+	public void setPriceStr(String priceStr) {
+		this.priceStr = priceStr;
+	}
+	
 	@Override
 	public void writeFields(DataOutput out) throws IOException {
 		// TODO Auto-generated method stub
@@ -239,6 +252,7 @@ public class DealerCoupon implements java.io.Serializable, ICacheable{
 		SerializeUtils.writeLong(out, lockTime);
 		SerializeUtils.writeInt(out, status);
 		SerializeUtils.writeInt(out, verifiedNum);
+		SerializeUtils.writeString(out, priceStr);
 	}
 	@Override
 	public void readFields(DataInput in) throws IOException {
@@ -256,6 +270,7 @@ public class DealerCoupon implements java.io.Serializable, ICacheable{
 		lockTime = SerializeUtils.readLong(in);
 		status = SerializeUtils.readInt(in);
 		verifiedNum = SerializeUtils.readInt(in);
+		priceStr=SerializeUtils.readString(in);
 	}
 	@Transient
 	@Override
@@ -263,4 +278,6 @@ public class DealerCoupon implements java.io.Serializable, ICacheable{
 		// TODO Auto-generated method stub
 		return EMPTY.getId().equals(id);
 	}
+
+	
 }

@@ -32,6 +32,7 @@ CREATE TABLE `dealer_coupon` (
   `lockTime` datetime(6) DEFAULT NULL COMMENT '锁定时间',
   `status` int(1) NOT NULL COMMENT '优惠券状态 ：0-有效 1-无效',
   `verifiedNum` int(100) NOT NULL DEFAULT '0' COMMENT '优惠券核销人数',
+  `priceStr` varchar(100) NOT NULL COMMENT '经销商输入的商品指导价',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 

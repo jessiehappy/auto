@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import auto.datamodel.controller.constants.JsonStatus;
+import auto.master.service.autho.IAuthoService;
 import auto.qr.service.user.ICustomUserService;
 import auto.qr.service.user.IUserService;
 import auto.qr.service.wx.WXService;
@@ -32,6 +33,9 @@ public class CustomUserController {
 	
 	@Autowired
 	private IUserService userService;
+	
+	@Autowired
+	private IAuthoService authService;
 	
 	@Autowired
 	private WXService wxService;
@@ -95,7 +99,7 @@ public class CustomUserController {
 	 * @param response
 	 * @return
 	 */
-    @RequestMapping("/getopenId")  
+    @RequestMapping("/getopenid")  
     @ResponseBody  
     public String getopenId(HttpServletRequest request, HttpServletResponse response) {     	
     	String code = WebUtils.getNullIfEmpty(request, "code");
@@ -103,11 +107,10 @@ public class CustomUserController {
         try {
 			openId=wxService.getOpenId(code);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			log.error(e);
 		}
     	return openId;
     }  
-	
 
 }

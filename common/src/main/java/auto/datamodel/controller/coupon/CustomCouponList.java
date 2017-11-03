@@ -1,6 +1,8 @@
 package auto.datamodel.controller.coupon;
 
 import auto.datamodel.dao.Coupon;
+import auto.datamodel.dao.DealerCoupon;
+import auto.datamodel.dao.Series;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,16 +12,20 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class CustomCouponList {
+	private Long couponId;
+	private String brandName;//品牌名称
+	private String seriesName;//车系名称
+	private String titleName;//标题名称
+	private Long endedTime;//优惠券截止时间
+	private Integer status;//优惠券使用状态（0-未使用  1-已使用  2-已过期）
 	
-	//来源于 coupon表(使用的优惠券)
-	private String couponName;//优惠券名称
-	private Long createTime;//优惠券生效时间
-	private Long endedTime;//优惠券失效时间
-	
-	public CustomCouponList(Coupon coupon){
-		this.couponName=coupon.getCouponName();
-		this.createTime=coupon.getCreateTime();
-		this.endedTime=coupon.getEndedTime();	
+	public CustomCouponList(Coupon coupon, Series series, DealerCoupon dealerCoupon){
+		this.couponId=coupon.getId();
+		this.brandName=series.getBrandName();
+		this.seriesName=series.getName();
+		this.titleName=dealerCoupon.getTitleName();
+		this.endedTime=coupon.getEndedTime();
+		this.status=coupon.getStatus();
 	}
 	
 }
