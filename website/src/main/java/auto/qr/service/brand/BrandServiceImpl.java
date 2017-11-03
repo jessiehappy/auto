@@ -35,7 +35,6 @@ public class BrandServiceImpl implements IBrandService {
 	
 	@Override
 	public List<CouponHomeBrandResult> getCouponHomeBrand() {
-//		List<Brand> brands = this.brandDao.getBrand();
 		Category category = this.categoryDao.getCategoryByCnameAndLev(CategoryName.AUTOMOBILE, CategoryLevel.FIRST.ordinal());//得到一级类目的汽车的类目对象
 		if(category == null) return null;
 		List<Category> categories = this.categoryDao.getCategory(category);//得到一级目录为汽车的二级目录(进口车、国产车等)
@@ -64,7 +63,7 @@ public class BrandServiceImpl implements IBrandService {
 			result.setItems(items.getValue());
 			results.add(result);
 		}
-		return null;
+		return results;
 	}
 
 	private void sortCategory(List<Category> categories) {
@@ -90,6 +89,7 @@ public class BrandServiceImpl implements IBrandService {
 
 			@Override
 			public int compare(CouponHomeBrandDetailedResult o1, CouponHomeBrandDetailedResult o2) {
+				if(o1.getSortNumber() == null || o2.getSortNumber() == null) return 0;
 				if(o1.getSortNumber() > o2.getSortNumber()){
 					return 1;
 				}
