@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import auto.datamodel.controller.constants.JsonStatus;
 import auto.qr.service.user.ICustomUserService;
 import auto.qr.service.user.IUserService;
+import auto.qr.service.wx.WXService;
 import auto.util.JsonUtils;
 import auto.datamodel.BasicJson;
 import auto.util.WebUtils;
@@ -28,8 +29,12 @@ public class CustomUserController {
 	
 	@Autowired
 	private ICustomUserService cuserService;
+	
 	@Autowired
 	private IUserService userService;
+	
+	@Autowired
+	private WXService wxService;
 	
 	/**
 	 * 发送验证短信
@@ -84,7 +89,25 @@ public class CustomUserController {
 		return JsonUtils.toJson(result);
 	}
 	
-	
+	/**
+	 * 根据code 获取  openId
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+    @RequestMapping("/getopenId")  
+    @ResponseBody  
+    public String getopenId(HttpServletRequest request, HttpServletResponse response) {     	
+    	String code = WebUtils.getNullIfEmpty(request, "code");
+        String openId=null; 
+        try {
+			openId=wxService.getOpenId(code);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	return openId;
+    }  
 	
 
 }

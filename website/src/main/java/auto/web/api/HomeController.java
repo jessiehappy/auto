@@ -56,4 +56,22 @@ public class HomeController {
 		result = new BasicJson(JsonStatus.SUCCESS_CODE, JsonStatus.successMsg, items);
 		return JsonUtils.toJson(result);
 	}
+	/**
+	 * c端用户首页
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping( value = "/custom/home", method = RequestMethod.POST )
+	@ResponseBody
+	public String customHome(HttpServletRequest request, HttpServletResponse response) {
+		
+		BasicJson result = null;
+		String telephone = WebUtils.getNullIfEmpty(request, "telephone");
+		
+		
+		
+		
+		return JsonUtils.toJson(result);
+	}
 }
