@@ -22,4 +22,14 @@ public class CategoryBrandDaoImpl extends ReadonlyDaoImpl implements ICategoryBr
 		return criteria.list();
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public CategoryBrand getCategoryBrand(Long categoryBrandId) {
+		Criteria criteria = getSession().createCriteria(CategoryBrand.class);
+		criteria.add(Restrictions.eq("id", categoryBrandId))
+				.add(Restrictions.eq("brandStatus", BrandStatus.NORMAL.ordinal()));
+		List<CategoryBrand> categoryBrand = criteria.list();
+		return categoryBrand.size() == 0 ? null : categoryBrand.get(0);
+	}
+
 }

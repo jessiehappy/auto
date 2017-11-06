@@ -179,4 +179,7 @@ public class CouponServiceImpl implements ICouponService {
 			System.out.println(dealerCoupon.getCommission());
 		}
 	}*/
+	public List<DealerCoupon> listDealerCoupons() {
+		return this.dealerCouponDao.listDealerCoupon();
+	}
 };

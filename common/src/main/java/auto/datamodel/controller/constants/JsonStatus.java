@@ -115,6 +115,13 @@ public class JsonStatus {
     
     public static final int COUPONQUOTA_EMPTY  = 2023;
     
+    // categoryBrand 
+    
+    public static final int CATEGORY_BRAND_EMPTY = 2024; 
+    
+    //brand
+    
+    public static final int BRAND_EMPTY = 2025;
     
     public static final int USER_CODE_ERROT = 3000;
     
@@ -367,6 +374,14 @@ public class JsonStatus {
     public static final String generateCouponError = "代金券生成失败";
     
     public static final String couponquotaEmpty = "代金券额度为空！";
+    
+    // categoryBrand
+    
+    public static final String categoryBrandEmpty = "不存在该商品或者该品牌在该目录下已失效";
+    
+    //brand
+    
+    public static final String brandEmpty = "该品牌已失效";
     //default response
     
     public static final String ERROR_STATUS = JsonUtils.toJson(
