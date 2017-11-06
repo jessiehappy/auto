@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2017-11-02 16:50:28
+Date: 2017-11-06 09:52:50
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -24,6 +24,8 @@ CREATE TABLE `dealer_coupon` (
   `dealerUsername` varchar(100) NOT NULL COMMENT '经销商用户名',
   `dealerSeriesId` bigint(20) NOT NULL COMMENT '经销商车系ID',
   `seriesId` bigint(20) NOT NULL COMMENT '车系ID',
+  `titleName` varchar(100) DEFAULT NULL COMMENT '汽车商品名称',
+  `priceStr` varchar(100) NOT NULL COMMENT '经销商填写的商品价格字符串',
   `couponNum` int(11) NOT NULL COMMENT '优惠券数量',
   `commission` int(11) NOT NULL COMMENT '佣金 单位分',
   `startTime` datetime(6) NOT NULL COMMENT '优惠券生效时间',
