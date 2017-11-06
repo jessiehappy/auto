@@ -14,7 +14,7 @@ import auto.dao.impl.DaoImpl;
 import auto.datamodel.cache.CacheType;
 import auto.datamodel.dao.DealerAuth;
 
-@Repository("masterDAuthDao")
+@Repository
 public class DealerAuthDaoImpl extends DaoImpl implements IDealerAuthDao {
     
 	private Criterion getUsernameCriterion(Collection<String> usernames) {

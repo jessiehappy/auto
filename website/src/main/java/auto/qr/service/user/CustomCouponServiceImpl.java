@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import auto.datamodel.controller.coupon.CustomCoupon;
 import auto.datamodel.controller.coupon.CustomCouponList;
 import auto.datamodel.dao.AutoCoupon;
 import auto.datamodel.dao.Coupon;
@@ -55,14 +56,15 @@ public class CustomCouponServiceImpl implements ICustomCouponService {
 			Series series=seriesDao.getSeriesById(seriesId);
 			//获取经销商用户标识username
 			String dealerUserName=dealerCoupon.getDealerUsername();
-			DealerAuth dealerAuth=dealerauthDao.getDAuth(dealerUserName);
+			DealerAuth dAuth=dealerauthDao.getDAuth(dealerUserName);
 			
+			CustomCoupon customCoupon=new CustomCoupon(coupon, dAuth, series, dealerCoupon);
 			
-			
-			
-			
+			CustomCouponList customCoupons=new CustomCouponList(customCoupon);
+
 			//添加
+			list.add(customCoupons);
 		}
-		return null;
+		return list;
 	}
 }

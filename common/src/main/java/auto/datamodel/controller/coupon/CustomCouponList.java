@@ -28,4 +28,13 @@ public class CustomCouponList {
 		this.status=coupon.getStatus();
 	}
 	
+	public CustomCouponList(CustomCoupon customCoupon){
+		this.couponId=customCoupon.getCouponId();
+		this.brandName=customCoupon.getBrandName();
+		this.seriesName=customCoupon.getSeriesName();
+		this.titleName=customCoupon.getTitleName();
+		this.endedTime=customCoupon.getEndedTime();
+		this.status=customCoupon.getStatus();
+	}
+	
 }

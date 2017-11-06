@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import auto.datamodel.controller.coupon.CustomCouponList;
 import auto.qr.service.user.ICustomCouponService;
-import auto.qr.service.user.ICustomUserService;
 import auto.util.JsonUtils;
 import auto.datamodel.BasicJson;
 import auto.util.WebUtils;
