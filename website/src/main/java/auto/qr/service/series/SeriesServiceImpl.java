@@ -19,8 +19,13 @@ public class SeriesServiceImpl implements ISeriesService {
 	@Override
 	public List<SeriesListResult> getSeriesListByBrandId(Long id) {
 		if(id == null) return null;
-		List<SeriesListResult> seriesList = new ArrayList<SeriesListResult>();
-		List<Series> series = this.seriesDao.getSeriesByBrandId(id);
+		List<SeriesListResult> seriesListResult = new ArrayList<SeriesListResult>();
+		List<Series> seriesList = this.seriesDao.getSeriesByBrandId(id);
+		if(seriesList == null) return null;
+		for(Series series : seriesList) {
+			SeriesListResult seriesResult = new SeriesListResult(series);
+			seriesListResult.add(seriesResult);
+		}
 		return null;
 	}
 

@@ -1,11 +1,8 @@
 package auto.datamodel.controller.coupon;
 
-import java.util.Date;
-
 import auto.datamodel.dao.Brand;
 import auto.datamodel.dao.DealerCoupon;
 import auto.datamodel.dao.Series;
-import auto.util.CommonUtils;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -20,7 +17,7 @@ public class GenerateCouponResult {
 	/**
 	 * 代金券优惠截止时间  2017-10-31
 	 */
-	private String offerDeadline;
+	private Long offerDeadline;
 	/**
 	 * 佣金  设定的代金券额度不能超过佣金
 	 */
@@ -29,7 +26,7 @@ public class GenerateCouponResult {
 	public GenerateCouponResult(DealerCoupon dealerCoupon, Series series,
 			Brand brand) {
 		this.name = fillName(series, brand, dealerCoupon);
-		this.offerDeadline = CommonUtils.getShortTimeFormat(new Date(dealerCoupon.getFinishedTime()));
+		this.offerDeadline = dealerCoupon.getFinishedTime().getTime();
 		this.commission = dealerCoupon.getCommission();
 	}
 

@@ -5,6 +5,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -47,12 +48,12 @@ public class CategoryBrand implements java.io.Serializable, ICacheable{
 	/**
 	 * 创建时间
 	 */
-	private Long createTime;
+	private Date createTime;
 	
 	/**
 	 * 修改时间
 	 */
-	private Long modifiedTime;
+	private Date modifiedTime;
 	
 	/**
 	 * 平台二级目录ID
@@ -101,19 +102,19 @@ public class CategoryBrand implements java.io.Serializable, ICacheable{
 		this.sortNumber = sortNumber;
 	}
 
-	public Long getCreateTime() {
+	public Date getCreateTime() {
 		return createTime;
 	}
 
-	public void setCreateTime(Long createTime) {
+	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}
 
-	public Long getModifiedTime() {
+	public Date getModifiedTime() {
 		return modifiedTime;
 	}
 
-	public void setModifiedTime(Long modifiedTime) {
+	public void setModifiedTime(Date modifiedTime) {
 		this.modifiedTime = modifiedTime;
 	}
 
@@ -140,8 +141,8 @@ public class CategoryBrand implements java.io.Serializable, ICacheable{
 		SerializeUtils.writeLong(out, brandId);
 		SerializeUtils.writeInt(out, brandStatus);
 		SerializeUtils.writeInt(out, sortNumber);
-		SerializeUtils.writeLong(out, createTime);
-		SerializeUtils.writeLong(out, modifiedTime);
+		SerializeUtils.writeDate(out, createTime);
+		SerializeUtils.writeDate(out, modifiedTime);
 		SerializeUtils.writeLong(out, secondLevId);
 		SerializeUtils.writeLong(out, thirdLevId);
 	}
@@ -153,8 +154,8 @@ public class CategoryBrand implements java.io.Serializable, ICacheable{
 		brandId = SerializeUtils.readLong(in);
 		brandStatus = SerializeUtils.readInt(in);
 		sortNumber = SerializeUtils.readInt(in);
-		createTime = SerializeUtils.readLong(in);
-		modifiedTime = SerializeUtils.readLong(in);
+		createTime = SerializeUtils.readDate(in);
+		modifiedTime = SerializeUtils.readDate(in);
 		secondLevId= SerializeUtils.readLong(in);
 		thirdLevId= SerializeUtils.readLong(in);
 	}

@@ -5,6 +5,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -37,12 +38,12 @@ public class Series implements java.io.Serializable, ICacheable{
 	/**
 	 * 创建时间
 	 */
-	private Long creatTime;
+	private Date creatTime;
 	
 	/**
 	 * 最后修改时间
 	 */
-	private Long modifiedTime;
+	private Date modifiedTime;
 	
 	/**
 	 * 商品分类ID
@@ -106,16 +107,16 @@ public class Series implements java.io.Serializable, ICacheable{
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Long getCreatTime() {
+	public Date getCreatTime() {
 		return creatTime;
 	}
-	public void setCreatTime(Long creatTime) {
+	public void setCreatTime(Date creatTime) {
 		this.creatTime = creatTime;
 	}
-	public Long getModifiedTime() {
+	public Date getModifiedTime() {
 		return modifiedTime;
 	}
-	public void setModifiedTime(Long modifiedTime) {
+	public void setModifiedTime(Date modifiedTime) {
 		this.modifiedTime = modifiedTime;
 	}
 	public Long getcId() {
@@ -178,8 +179,8 @@ public class Series implements java.io.Serializable, ICacheable{
 		// TODO Auto-generated method stub
 		out.writeLong(id);
 		SerializeUtils.writeString(out, name);
-		SerializeUtils.writeLong(out, creatTime);
-		SerializeUtils.writeLong(out, modifiedTime);
+		SerializeUtils.writeDate(out, creatTime);
+		SerializeUtils.writeDate(out, modifiedTime);
 		SerializeUtils.writeLong(out, cId);
 		SerializeUtils.writeString(out, smallImg);
 		SerializeUtils.writeString(out, bigImg);
@@ -195,8 +196,8 @@ public class Series implements java.io.Serializable, ICacheable{
 		// TODO Auto-generated method stub
 		id = in.readLong();
 		name = SerializeUtils.readString(in);
-		creatTime = SerializeUtils.readLong(in);
-		modifiedTime = SerializeUtils.readLong(in);
+		creatTime = SerializeUtils.readDate(in);
+		modifiedTime = SerializeUtils.readDate(in);
 		cId = SerializeUtils.readLong(in);
 		smallImg = SerializeUtils.readString(in);
 		bigImg = SerializeUtils.readString(in);

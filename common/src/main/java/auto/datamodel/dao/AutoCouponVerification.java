@@ -5,6 +5,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -29,17 +30,18 @@ public class AutoCouponVerification implements java.io.Serializable, ICacheable{
 	private static final long serialVersionUID = 114228974410744567L;
 	private static final AutoCouponVerification EMPTY = new AutoCouponVerification(0L);
 	
+	
 	private Long id;
 	
 	/**
 	 * 创建时间
 	 */
-	private Long createTime;
+	private Date createTime;
 	
 	/**
 	 * 修改时间
 	 */
-	private Long modifiedTime;
+	private Date modifiedTime;
 	
 	/**
 	 * 核销金额 单位分
@@ -61,60 +63,76 @@ public class AutoCouponVerification implements java.io.Serializable, ICacheable{
 	 */
 	private Integer status;
 	
+	public AutoCouponVerification(Long id) {
+		super();
+		this.id = id;
+	}
+
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Long getCreateTime() {
+
+	public Date getCreateTime() {
 		return createTime;
 	}
-	public void setCreateTime(Long createTime) {
+
+	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}
-	public Long getModifiedTime() {
+
+	public Date getModifiedTime() {
 		return modifiedTime;
 	}
-	public void setModifiedTime(Long modifiedTime) {
+
+	public void setModifiedTime(Date modifiedTime) {
 		this.modifiedTime = modifiedTime;
 	}
-	public int getAmount() {
+
+	public Integer getAmount() {
 		return amount;
 	}
+
 	public void setAmount(Integer amount) {
 		this.amount = amount;
 	}
+
 	public String getUsername() {
 		return username;
 	}
+
 	public void setUsername(String username) {
 		this.username = username;
 	}
+
 	public Long getAutoCouponId() {
 		return autoCouponId;
 	}
+
 	public void setAutoCouponId(Long autoCouponId) {
 		this.autoCouponId = autoCouponId;
 	}
-	public int getStatus() {
+
+	public Integer getStatus() {
 		return status;
 	}
+
 	public void setStatus(Integer status) {
 		this.status = status;
 	}
-
-	public AutoCouponVerification(Long id) {
-		this.id = id;
-	}
+	
+	
 	@Override
 	public void writeFields(DataOutput out) throws IOException {
 		// TODO Auto-generated method stub
 		out.writeLong(id);
-		SerializeUtils.writeLong(out, createTime);
-		SerializeUtils.writeLong(out, modifiedTime);
+		SerializeUtils.writeDate(out, createTime);
+		SerializeUtils.writeDate(out, modifiedTime);
 		SerializeUtils.writeInt(out, amount);
 		SerializeUtils.writeString(out, username);
 		SerializeUtils.writeLong(out, autoCouponId);
@@ -125,8 +143,8 @@ public class AutoCouponVerification implements java.io.Serializable, ICacheable{
 	public void readFields(DataInput in) throws IOException {
 		// TODO Auto-generated method stub
 		id = in.readLong();
-		createTime = SerializeUtils.readLong(in);
-		modifiedTime = SerializeUtils.readLong(in);
+		createTime = SerializeUtils.readDate(in);
+		modifiedTime = SerializeUtils.readDate(in);
 		amount = SerializeUtils.readInt(in);
 		username = SerializeUtils.readString(in);
 		autoCouponId = SerializeUtils.readLong(in);
