@@ -19,4 +19,10 @@ public class CouponHomeBrandResult {
 	 */
 	private List<CouponHomeBrandDetailedResult> items = 
 			new ArrayList<CouponHomeBrandDetailedResult>();
+	
+	/**
+	 * 类目商品主键 从下一层传，用于下一步的操作
+	 * 以"1_2_3_4_"的格式展示
+	 *//*
+	private String categoryBrandId;*/
 }

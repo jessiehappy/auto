@@ -50,9 +50,14 @@ public class DealerCoupon implements java.io.Serializable, ICacheable{
 	private Long seriesId;
 	
 	/**
-	 * 汽车商品名称
+	 * 汽车商品名称  可以为null
 	 */
 	private String titleName;
+	
+	/**
+	 * 经销商填写的商品价格字符串
+	 */
+	private String priceStr;
 	
 	/**
 	 * 优惠券数量  not null
@@ -92,10 +97,7 @@ public class DealerCoupon implements java.io.Serializable, ICacheable{
 	 * 优惠券核销人数
 	 */
 	private Integer verifiedNum;
-	/**
-	 * 供应商输入的商品价格指导信息
-	 */
-	private String priceStr;
+
 	
 	public DealerCoupon(Long id) {
 		this.id = id;
@@ -227,7 +229,6 @@ public class DealerCoupon implements java.io.Serializable, ICacheable{
 	public void setVerifiedNum(Integer verifiedNum) {
 		this.verifiedNum = verifiedNum;
 	}
-	
 	public String getPriceStr() {
 		return priceStr;
 	}
@@ -235,7 +236,6 @@ public class DealerCoupon implements java.io.Serializable, ICacheable{
 	public void setPriceStr(String priceStr) {
 		this.priceStr = priceStr;
 	}
-	
 	@Override
 	public void writeFields(DataOutput out) throws IOException {
 		// TODO Auto-generated method stub
@@ -244,6 +244,7 @@ public class DealerCoupon implements java.io.Serializable, ICacheable{
 		SerializeUtils.writeLong(out, dealerSeriesId);
 		SerializeUtils.writeLong(out, seriesId);
 		SerializeUtils.writeString(out, titleName);
+		SerializeUtils.writeString(out, priceStr);
 		SerializeUtils.writeInt(out, couponNum);
 		SerializeUtils.writeInt(out, commission);
 		SerializeUtils.writeLong(out, startTime);
@@ -262,6 +263,7 @@ public class DealerCoupon implements java.io.Serializable, ICacheable{
 		dealerSeriesId = SerializeUtils.readLong(in);
 		seriesId = SerializeUtils.readLong(in);
 		titleName = SerializeUtils.readString(in);
+		priceStr = SerializeUtils.readString(in);
 		couponNum = SerializeUtils.readInt(in);
 		commission = SerializeUtils.readInt(in);
 		startTime = SerializeUtils.readLong(in);

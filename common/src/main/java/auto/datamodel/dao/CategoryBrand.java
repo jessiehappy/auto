@@ -35,7 +35,7 @@ public class CategoryBrand implements java.io.Serializable, ICacheable{
 	private Long brandId;
 
 	/**
-	 * 品牌当前类目下是否有效 0：无效 1：有效
+	 * 品牌当前类目下是否有效 0:有效 1：无效
 	 */
 	private Integer brandStatus;
 	
