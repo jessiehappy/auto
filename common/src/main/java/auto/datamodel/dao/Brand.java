@@ -5,6 +5,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -56,12 +57,12 @@ public class Brand implements java.io.Serializable, ICacheable{
 	/**
 	 * 创建时间
 	 */
-	private Long creatTime;
+	private Date creatTime;
 	
 	/**
 	 * 修改时间
 	 */
-	private Long modifiedTime;
+	private Date modifiedTime;
 
 	public Brand(Long id) {
 		this.id = id;
@@ -109,19 +110,19 @@ public class Brand implements java.io.Serializable, ICacheable{
 		this.brandStatus = brandStatus;
 	}
 
-	public Long getCreatTime() {
+	public Date getCreatTime() {
 		return creatTime;
 	}
 
-	public void setCreatTime(Long creatTime) {
+	public void setCreatTime(Date creatTime) {
 		this.creatTime = creatTime;
 	}
 
-	public Long getModifiedTime() {
+	public Date getModifiedTime() {
 		return modifiedTime;
 	}
 
-	public void setModifiedTime(Long modifiedTime) {
+	public void setModifiedTime(Date modifiedTime) {
 		this.modifiedTime = modifiedTime;
 	}
 
@@ -133,8 +134,8 @@ public class Brand implements java.io.Serializable, ICacheable{
 		SerializeUtils.writeString(out, brandLogoUrl);
 		SerializeUtils.writeString(out, brandName);
 		SerializeUtils.writeInt(out, brandStatus);
-		SerializeUtils.writeLong(out, creatTime);
-		SerializeUtils.writeLong(out, modifiedTime);
+		SerializeUtils.writeDate(out, creatTime);
+		SerializeUtils.writeDate(out, modifiedTime);
 	}
 
 	@Override
@@ -145,8 +146,8 @@ public class Brand implements java.io.Serializable, ICacheable{
 		brandLogoUrl = SerializeUtils.readString(in);
 		brandName = SerializeUtils.readString(in);
 		brandStatus = SerializeUtils.readInt(in);
-		creatTime = SerializeUtils.readLong(in);
-		modifiedTime = SerializeUtils.readLong(in);
+		creatTime = SerializeUtils.readDate(in);
+		modifiedTime = SerializeUtils.readDate(in);
 	}
 
 	@Transient

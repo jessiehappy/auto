@@ -1,5 +1,6 @@
 package auto.datamodel.controller.series;
 
+import auto.datamodel.dao.Series;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -28,4 +29,12 @@ public class SeriesListResult {
 	 * 此代金券发布时间  用于列表的排序
 	 */
 	private Long releaseTime;
+	
+	public SeriesListResult(Series series) {
+		this.id = series.getId();
+		this.seriesImg = series.getSmallImg();
+		this.name = series.getName() + "-" + series.getBrandName();
+		this.dealerNum = null;
+		this.releaseTime = null;
+	}
 }

@@ -5,6 +5,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -32,12 +33,12 @@ public class Payment implements java.io.Serializable, ICacheable{
 	/**
 	 * 创建时间
 	 */
-	private Long createTime;
+	private Date createTime;
 	
 	/**
 	 * 修改时间
 	 */
-	private Long modifiedTime;
+	private Date modifiedTime;
 	
 	/**
 	 * 账单用户名
@@ -99,16 +100,16 @@ public class Payment implements java.io.Serializable, ICacheable{
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Long getCreateTime() {
+	public Date getCreateTime() {
 		return createTime;
 	}
-	public void setCreateTime(Long createTime) {
+	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}
-	public Long getModifiedTime() {
+	public Date getModifiedTime() {
 		return modifiedTime;
 	}
-	public void setModifiedTime(Long modifiedTime) {
+	public void setModifiedTime(Date modifiedTime) {
 		this.modifiedTime = modifiedTime;
 	}
 	public String getUsername() {
@@ -175,8 +176,8 @@ public class Payment implements java.io.Serializable, ICacheable{
 	public void writeFields(DataOutput out) throws IOException {
 		// TODO Auto-generated method stub
 		out.writeLong(id);
-		SerializeUtils.writeLong(out, createTime);
-		SerializeUtils.writeLong(out, modifiedTime);
+		SerializeUtils.writeDate(out, createTime);
+		SerializeUtils.writeDate(out, modifiedTime);
 		SerializeUtils.writeString(out, username);
 		SerializeUtils.writeString(out, fromUsername);
 		SerializeUtils.writeString(out, toUsername);
@@ -192,8 +193,8 @@ public class Payment implements java.io.Serializable, ICacheable{
 	public void readFields(DataInput in) throws IOException {
 		// TODO Auto-generated method stub
 		id = in.readLong();
-		createTime = SerializeUtils.readLong(in);
-		modifiedTime = SerializeUtils.readLong(in);
+		createTime = SerializeUtils.readDate(in);
+		modifiedTime = SerializeUtils.readDate(in);
 		username = SerializeUtils.readString(in);
 		fromUsername = SerializeUtils.readString(in);
 		toUsername = SerializeUtils.readString(in);
