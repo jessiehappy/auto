@@ -1,6 +1,7 @@
 package auto.datamodel.controller.coupon;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 import auto.datamodel.dao.Coupon;
 import auto.datamodel.dao.DealerAuth;
@@ -19,10 +20,10 @@ public class CustomCoupon {
 	
 	private Long couponId;
 	private String couponName;//优惠券名称
-	private Long createTime;//优惠券生效时间
+	private Date createTime;//优惠券生效时间
 	private String couponUrl;//生成的优惠券二维码地址
 	private Integer coupon;//优惠券金额
-	private Long endedTime;//优惠券截止时间
+	private Date endedTime;//优惠券截止时间
 	private Integer status;//优惠券使用状态（0-未使用  1-已使用  2-已过期）
 	
 	private String brandName;//品牌名称

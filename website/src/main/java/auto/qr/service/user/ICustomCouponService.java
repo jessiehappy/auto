@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import auto.datamodel.BasicJson;
+import auto.datamodel.controller.coupon.CustomCouponDetail;
 import auto.datamodel.controller.coupon.CustomCouponList;
 import auto.datamodel.dao.CustomUser;
 
@@ -16,5 +17,13 @@ public interface ICustomCouponService {
 	 * @return
 	 */
 	List<CustomCouponList> getMycoupons(String username);
+	/**
+	 * 根据CouponId 查询代金券的详细信息
+	 * @param couponId
+	 * @return
+	 */
+	CustomCouponDetail getCouponDetail(Long couponId);
+	
+	
     
 }

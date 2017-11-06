@@ -1,6 +1,8 @@
 package auto.datamodel.controller.coupon;
 
 import java.math.BigDecimal;
+import java.util.Date;
+
 import auto.datamodel.dao.Coupon;
 import auto.datamodel.dao.DealerAuth;
 import lombok.Data;
@@ -16,8 +18,8 @@ public class CustomCouponDetail {
 	
 	//来源于 coupon表(使用的优惠券)
 	private String couponName;//优惠券名称
-	private Long createTime;//优惠券生效时间
-	private Long endedTime;//优惠券失效时间
+	private Date createTime;//优惠券生效时间
+	private Date endedTime;//优惠券失效时间
 	private String couponUrl;//生成的优惠券二维码地址
 	
 	//来源于dealer_auth表（经销商认证表）

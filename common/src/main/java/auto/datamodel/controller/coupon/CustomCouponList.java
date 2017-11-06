@@ -1,5 +1,7 @@
 package auto.datamodel.controller.coupon;
 
+import java.util.Date;
+
 import auto.datamodel.dao.Coupon;
 import auto.datamodel.dao.DealerCoupon;
 import auto.datamodel.dao.Series;
@@ -16,7 +18,7 @@ public class CustomCouponList {
 	private String brandName;//品牌名称
 	private String seriesName;//车系名称
 	private String titleName;//标题名称
-	private Long endedTime;//优惠券截止时间
+	private Date endedTime;//优惠券截止时间
 	private Integer status;//优惠券使用状态（0-未使用  1-已使用  2-已过期）
 	
 	public CustomCouponList(Coupon coupon, Series series, DealerCoupon dealerCoupon){

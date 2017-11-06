@@ -39,6 +39,23 @@ public class CustomCouponServiceImpl implements ICustomCouponService {
     @Autowired
     private IDealerAuthDao dealerauthDao;
    
+    private CustomCoupon getCustomCoupon(Coupon coupon){
+    	//获取代金券的id
+		Long couponId=coupon.getId();
+		AutoCoupon autoCoupon=autocouponDao.getAutoCoupon(couponId);
+		//获取经销商发布券的id
+		Long dealerCouponId=autoCoupon.getDealerCouponId();
+		DealerCoupon dealerCoupon=dealcouponDao.getDealerCouponById(dealerCouponId);
+	    //获取车系id
+		Long seriesId=dealerCoupon.getDealerSeriesId();
+		Series series=seriesDao.getSeriesById(seriesId);
+		//获取经销商用户标识username
+		String dealerUserName=dealerCoupon.getDealerUsername();
+		DealerAuth dAuth=dealerauthDao.getDAuth(dealerUserName);
+		CustomCoupon customCoupon=new CustomCoupon(coupon, dAuth, series, dealerCoupon);
+		
+		return customCoupon;
+    }
 
 	@Override
 	public List<CustomCouponList> getMycoupons(String username) {
@@ -46,23 +63,8 @@ public class CustomCouponServiceImpl implements ICustomCouponService {
 		//根据username查询coupon表
 		List<Coupon> coupons=couponDao.getCoupons(username);
 		for (Coupon coupon : coupons) {
-			//获取代金券的id
-			Long couponId=coupon.getId();
-			AutoCoupon autoCoupon=autocouponDao.getAutoCoupon(couponId);
-			//获取经销商发布券的id
-			Long dealerCouponId=autoCoupon.getDealerCouponId();
-			DealerCoupon dealerCoupon=dealcouponDao.getDealerCouponById(dealerCouponId);
-		    //获取车系id
-			Long seriesId=dealerCoupon.getDealerSeriesId();
-			Series series=seriesDao.getSeriesById(seriesId);
-			//获取经销商用户标识username
-			String dealerUserName=dealerCoupon.getDealerUsername();
-			DealerAuth dAuth=dealerauthDao.getDAuth(dealerUserName);
-			
-			CustomCoupon customCoupon=new CustomCoupon(coupon, dAuth, series, dealerCoupon);
-			
+			CustomCoupon customCoupon=getCustomCoupon(coupon);			
 			CustomCouponList customCoupons=new CustomCouponList(customCoupon);
-
 			//添加
 			list.add(customCoupons);
 		}
