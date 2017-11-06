@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import auto.datamodel.CouponVerificationStatus;
 import auto.datamodel.cache.ICacheable;
 import auto.util.SerializeUtils;
 import lombok.NoArgsConstructor;
@@ -59,7 +60,29 @@ public class AutoCouponVerification implements java.io.Serializable, ICacheable{
 	private Long autoCouponId;
 	
 	/**
-	 * 核销状态 0：未核销 1：核销成功
+	 * 代理人
+	 */
+	private String proxyUsername;
+	/**
+	 * 优惠券金额 单位分
+	 */
+	private Integer coupon;
+	/**
+	 * 领券电话
+	 */
+	private String telephone;
+	/**
+	 * 领券人 可以为空
+	 */
+	private String cUsername;
+	/**
+	 * 车系ID
+	 */
+	private Long seriesId;
+	
+	/**
+	 * 核销状态 0：未核销 1：核销成功 2:核销失败
+	 * @see CouponVerificationStatus
 	 */
 	private Integer status;
 	
@@ -136,6 +159,11 @@ public class AutoCouponVerification implements java.io.Serializable, ICacheable{
 		SerializeUtils.writeInt(out, amount);
 		SerializeUtils.writeString(out, username);
 		SerializeUtils.writeLong(out, autoCouponId);
+		SerializeUtils.writeString(out, proxyUsername);
+		SerializeUtils.writeInt(out, coupon);
+		SerializeUtils.writeString(out, telephone);
+		SerializeUtils.writeString(out, cUsername);
+		SerializeUtils.writeLong(out, seriesId);
 		SerializeUtils.writeInt(out, status);
 	}
 
@@ -148,6 +176,11 @@ public class AutoCouponVerification implements java.io.Serializable, ICacheable{
 		amount = SerializeUtils.readInt(in);
 		username = SerializeUtils.readString(in);
 		autoCouponId = SerializeUtils.readLong(in);
+		proxyUsername = SerializeUtils.readString(in);
+		coupon = SerializeUtils.readInt(in);
+		telephone = SerializeUtils.readString(in);
+		cUsername = SerializeUtils.readString(in);
+		seriesId = SerializeUtils.readLong(in);
 		status = SerializeUtils.readInt(in);
 	}
 
