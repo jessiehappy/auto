@@ -32,7 +32,7 @@ public class CouponServiceImpl implements ICouponService {
 		if (id == null || proxyUser == null || couponQuota == null) return null;
 		DealerCoupon dealerCoupon = this.dealerCouponDao.getDealerCouponById(id);
 		dealerCoupon.setLock(DealerCouponLockStatus.COUPON_LOCKED.ordinal());//设置此经销商代金券已锁定
-		dealerCoupon.setLockTime(new Date().getTime());//锁定时间
+		dealerCoupon.setLockTime(new Date());//锁定时间
 		ProxyCoupon proxyCoupon = new ProxyCoupon();
 		proxyCoupon.setProxyUsername(proxyUser.getUsername());
 		proxyCoupon.setCoupon(couponQuota);

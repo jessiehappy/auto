@@ -5,6 +5,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -57,12 +58,12 @@ public class Category implements java.io.Serializable, ICacheable{
 	/**
 	 * 创建时间
 	 */
-	private Long creatTime;
+	private Date creatTime;
 	
 	/**
 	 * 修改时间
 	 */
-	private Long modifiedTime;
+	private Date modifiedTime;
 	
 	/**
 	 * 是否启用 0：未启用 1：已起用
@@ -125,22 +126,22 @@ public class Category implements java.io.Serializable, ICacheable{
 	}
 
 
-	public Long getCreatTime() {
+	public Date getCreatTime() {
 		return creatTime;
 	}
 
 
-	public void setCreatTime(Long creatTime) {
+	public void setCreatTime(Date creatTime) {
 		this.creatTime = creatTime;
 	}
 
 
-	public Long getModifiedTime() {
+	public Date getModifiedTime() {
 		return modifiedTime;
 	}
 
 
-	public void setModifiedTime(Long modifiedTime) {
+	public void setModifiedTime(Date modifiedTime) {
 		this.modifiedTime = modifiedTime;
 	}
 
@@ -162,8 +163,8 @@ public class Category implements java.io.Serializable, ICacheable{
 		SerializeUtils.writeInt(out, lev);
 		SerializeUtils.writeLong(out, parentId);
 		SerializeUtils.writeInt(out, sortNumber);
-		SerializeUtils.writeLong(out, creatTime);
-		SerializeUtils.writeLong(out, modifiedTime);
+		SerializeUtils.writeDate(out, creatTime);
+		SerializeUtils.writeDate(out, modifiedTime);
 		SerializeUtils.writeInt(out, status);
 	}
 
@@ -175,8 +176,8 @@ public class Category implements java.io.Serializable, ICacheable{
 		lev = SerializeUtils.readInt(in);
 		parentId = SerializeUtils.readLong(in);
 		sortNumber = SerializeUtils.readInt(in);
-		creatTime = SerializeUtils.readLong(in);
-		modifiedTime = SerializeUtils.readLong(in);
+		creatTime = SerializeUtils.readDate(in);
+		modifiedTime = SerializeUtils.readDate(in);
 		status = SerializeUtils.readInt(in);
 	}
 

@@ -5,6 +5,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -59,12 +60,12 @@ public class Coupon implements java.io.Serializable, ICacheable{
 	/**
 	 * 创建时间
 	 */
-	private Long createTime;
+	private Date createTime;
 	
 	/**
 	 * 结束时间
 	 */
-	private Long endedTime;
+	private Date endedTime;
 	
 	/**
 	 * 优惠券类型 0：汽车优惠券 1：other
@@ -110,16 +111,16 @@ public class Coupon implements java.io.Serializable, ICacheable{
 	public void setCoupon(Integer coupon) {
 		this.coupon = coupon;
 	}
-	public Long getCreateTime() {
+	public Date getCreateTime() {
 		return createTime;
 	}
-	public void setCreateTime(Long createTime) {
+	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}
-	public Long getEndedTime() {
+	public Date getEndedTime() {
 		return endedTime;
 	}
-	public void setEndedTime(Long endedTime) {
+	public void setEndedTime(Date endedTime) {
 		this.endedTime = endedTime;
 	}
 	public int getType() {
@@ -163,8 +164,8 @@ public class Coupon implements java.io.Serializable, ICacheable{
 		SerializeUtils.writeString(out, couponUrl);
 		SerializeUtils.writeString(out, username);
 		SerializeUtils.writeInt(out, coupon);
-		SerializeUtils.writeLong(out, createTime);
-		SerializeUtils.writeLong(out, endedTime);
+		SerializeUtils.writeDate(out, createTime);
+		SerializeUtils.writeDate(out, endedTime);
 		SerializeUtils.writeInt(out, type);
 		SerializeUtils.writeInt(out, status);
 		SerializeUtils.writeString(out, "telephone");
@@ -178,8 +179,8 @@ public class Coupon implements java.io.Serializable, ICacheable{
 		couponUrl = SerializeUtils.readString(in);
 		username = SerializeUtils.readString(in);
 		coupon = SerializeUtils.readInt(in);
-		createTime = SerializeUtils.readLong(in);
-		endedTime = SerializeUtils.readLong(in);
+		createTime = SerializeUtils.readDate(in);
+		endedTime = SerializeUtils.readDate(in);
 		type = SerializeUtils.readInt(in);
 		status = SerializeUtils.readInt(in);
 		telephone=SerializeUtils.readString(in);

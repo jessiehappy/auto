@@ -5,6 +5,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -72,12 +73,12 @@ public class DealerCoupon implements java.io.Serializable, ICacheable{
 	/**
 	 * 优惠券生效时间
 	 */
-	private Long startTime;
+	private Date startTime;
 	
 	/**
 	 * 优惠券失效时间
 	 */
-	private Long finishedTime;
+	private Date finishedTime;
 	
 	/**
 	 * 是否锁定 0：锁定 (大B不能修改) 1：未锁定(大B能修改)
@@ -87,7 +88,7 @@ public class DealerCoupon implements java.io.Serializable, ICacheable{
 	/**
 	 * 锁定时间
 	 */
-	private Long lockTime;
+	private Date lockTime;
 	
 	/**
 	 * 优惠券状态 ：0-有效 1-无效
@@ -165,22 +166,22 @@ public class DealerCoupon implements java.io.Serializable, ICacheable{
 	}
 
 
-	public Long getStartTime() {
+	public Date getStartTime() {
 		return startTime;
 	}
 
 
-	public void setStartTime(Long startTime) {
+	public void setStartTime(Date startTime) {
 		this.startTime = startTime;
 	}
 
 
-	public Long getFinishedTime() {
+	public Date getFinishedTime() {
 		return finishedTime;
 	}
 
 
-	public void setFinishedTime(Long finishedTime) {
+	public void setFinishedTime(Date finishedTime) {
 		this.finishedTime = finishedTime;
 	}
 
@@ -195,12 +196,12 @@ public class DealerCoupon implements java.io.Serializable, ICacheable{
 	}
 
 
-	public Long getLockTime() {
+	public Date getLockTime() {
 		return lockTime;
 	}
 
 
-	public void setLockTime(Long lockTime) {
+	public void setLockTime(Date lockTime) {
 		this.lockTime = lockTime;
 	}
 
@@ -247,10 +248,10 @@ public class DealerCoupon implements java.io.Serializable, ICacheable{
 		SerializeUtils.writeString(out, priceStr);
 		SerializeUtils.writeInt(out, couponNum);
 		SerializeUtils.writeInt(out, commission);
-		SerializeUtils.writeLong(out, startTime);
-		SerializeUtils.writeLong(out, finishedTime);
+		SerializeUtils.writeDate(out, startTime);
+		SerializeUtils.writeDate(out, finishedTime);
 		SerializeUtils.writeInt(out, lock);
-		SerializeUtils.writeLong(out, lockTime);
+		SerializeUtils.writeDate(out, lockTime);
 		SerializeUtils.writeInt(out, status);
 		SerializeUtils.writeInt(out, verifiedNum);
 		SerializeUtils.writeString(out, priceStr);
@@ -266,10 +267,10 @@ public class DealerCoupon implements java.io.Serializable, ICacheable{
 		priceStr = SerializeUtils.readString(in);
 		couponNum = SerializeUtils.readInt(in);
 		commission = SerializeUtils.readInt(in);
-		startTime = SerializeUtils.readLong(in);
-		finishedTime = SerializeUtils.readLong(in);
+		startTime = SerializeUtils.readDate(in);
+		finishedTime = SerializeUtils.readDate(in);
 		lock = SerializeUtils.readInt(in);
-		lockTime = SerializeUtils.readLong(in);
+		lockTime = SerializeUtils.readDate(in);
 		status = SerializeUtils.readInt(in);
 		verifiedNum = SerializeUtils.readInt(in);
 		priceStr=SerializeUtils.readString(in);
