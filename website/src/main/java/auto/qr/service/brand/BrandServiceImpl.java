@@ -41,9 +41,11 @@ public class BrandServiceImpl implements IBrandService {
 		if(categories == null) return null;
 		sortCategory(categories);
 		Map<String, List<CouponHomeBrandDetailedResult>> map2Brand = new HashMap<String, List<CouponHomeBrandDetailedResult>>();
+//		List<StringBuffer> categoryBrandIdlist = new ArrayList<StringBuffer>();//存放categoryBrandId
 		for(Category category2 : categories) {
 			List<CouponHomeBrandDetailedResult> items = new ArrayList<CouponHomeBrandDetailedResult>();
 			List<CategoryBrand> categoryBrandList = this.categoryBrandDao.getCategoryBrandBySecondLevId(category2.getId());
+//			StringBuffer sb = new StringBuffer();
 			for(CategoryBrand categoryBrand : categoryBrandList ) {
 				Brand brand = this.brandDao.getBrandById(categoryBrand.getBrandId());
 				CouponHomeBrandDetailedResult item = new CouponHomeBrandDetailedResult();
@@ -51,8 +53,11 @@ public class BrandServiceImpl implements IBrandService {
 				item.setImgUrl(brand.getBrandLogoUrl());
 				item.setBrandName(brand.getBrandName());
 				item.setSortNumber(categoryBrand.getSortNumber());
+				item.setCategoryBrandId(categoryBrand.getId());
 				items.add(item);
+//				sb.append(categoryBrand.getId()).append(",");
 			}
+//			categoryBrandIdlist.add(sb);
 			sortBrand(items);
 			map2Brand.put(category2.getcName(), items);
 		}
@@ -61,6 +66,7 @@ public class BrandServiceImpl implements IBrandService {
 			CouponHomeBrandResult result = new CouponHomeBrandResult();
 			result.setCategory(items.getKey());
 			result.setItems(items.getValue());
+//			result.setCategoryBrandId(categoryBrandIdlist.toString());
 			results.add(result);
 		}
 		return results;
@@ -100,6 +106,11 @@ public class BrandServiceImpl implements IBrandService {
 				return 0;
 			}
 		});
+	}
+
+	@Override
+	public Brand getBrandById(Long brandId) {
+		return this.brandDao.getBrandById(brandId);
 	}
 	
 	/*@Override

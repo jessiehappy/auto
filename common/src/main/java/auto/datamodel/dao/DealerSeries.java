@@ -50,6 +50,11 @@ public class DealerSeries implements java.io.Serializable, ICacheable{
 	private Integer guidePriceMax;
 	
 	/**
+	 * 经销商填写的商品价格字符串
+	 */
+	private String priceStr;
+	
+	/**
 	 * 车系小图 默认车系表小图
 	 */
 	private String smallImg;
@@ -117,6 +122,12 @@ public class DealerSeries implements java.io.Serializable, ICacheable{
 	public void setStatus(Integer status) {
 		this.status = status;
 	}
+	public String getPriceStr() {
+		return priceStr;
+	}
+	public void setPriceStr(String priceStr) {
+		this.priceStr = priceStr;
+	}
 	@Override
 	public void writeFields(DataOutput out) throws IOException {
 		// TODO Auto-generated method stub
@@ -125,6 +136,7 @@ public class DealerSeries implements java.io.Serializable, ICacheable{
 		SerializeUtils.writeLong(out, seriesId);
 		SerializeUtils.writeInt(out, guidePriceMin);
 		SerializeUtils.writeInt(out, guidePriceMax);
+		SerializeUtils.writeString(out, priceStr);
 		SerializeUtils.writeString(out, smallImg);
 		SerializeUtils.writeString(out, bigImg);
 		SerializeUtils.writeInt(out, status);
@@ -138,6 +150,7 @@ public class DealerSeries implements java.io.Serializable, ICacheable{
 		seriesId = SerializeUtils.readLong(in);
 		guidePriceMin = SerializeUtils.readInt(in);
 		guidePriceMax = SerializeUtils.readInt(in);
+		priceStr = SerializeUtils.readString(in);
 		smallImg = SerializeUtils.readString(in);
 		bigImg = SerializeUtils.readString(in);
 		status = SerializeUtils.readInt(in);

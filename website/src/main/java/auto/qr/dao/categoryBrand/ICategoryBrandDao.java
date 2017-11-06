@@ -8,4 +8,6 @@ public interface ICategoryBrandDao {
 
 	List<CategoryBrand> getCategoryBrandBySecondLevId(Long id);
 
+	CategoryBrand getCategoryBrand(Long categoryBrandId);
+
 }
