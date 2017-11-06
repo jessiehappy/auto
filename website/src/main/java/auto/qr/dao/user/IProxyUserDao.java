@@ -24,6 +24,7 @@ public interface IProxyUserDao extends IReadonlyDao {
 	 * @return
 	 */
 	List<ProxyUser> getPUsers(List<String> usernames);
+	ProxyUser getUserByToken(String token);
 	
     
 

@@ -24,6 +24,7 @@ public interface IDealerUserDao extends IReadonlyDao {
 	 * @return
 	 */
 	List<DealerUser> getDUsers(List<String> usernames);
+	DealerUser getUserByToken(String token);
 	
     
 

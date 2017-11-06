@@ -24,6 +24,7 @@ public interface ICustomUserDao extends IReadonlyDao {
 	 * @return
 	 */
 	List<CustomUser> getCUsers(List<String> usernames);
+	CustomUser getUserByToken(String token);
 	
     
 

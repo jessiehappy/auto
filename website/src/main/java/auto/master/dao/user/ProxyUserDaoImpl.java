@@ -42,14 +42,15 @@ public class ProxyUserDaoImpl extends DaoImpl implements IProxyUserDao {
         if (object == null) return ;
         if(object instanceof ProxyUser){
         	ProxyUser user=(ProxyUser)object;
-        	cacheManager.deprecate(CacheType.id2User, user.getId());
+        	cacheManager.deprecate(CacheType.id2ProxyUser, user.getId());
         	List<String> usernames=new ArrayList<String>();
         	if(user.getTelephone()!=null)usernames.add(user.getTelephone());
         	if(user.getWechatId()!=null) usernames.add(user.getWechatId());
-        	cacheManager.mdeprecate(CacheType.username2Id, usernames);
+        	cacheManager.mdeprecate(CacheType.username2ProxyUser, usernames);
         }
     }
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public ProxyUser getPUser(String username) {
 		List<ProxyUser> users = (List<ProxyUser>) getSession().createCriteria(ProxyUser.class)
@@ -72,6 +73,7 @@ public class ProxyUserDaoImpl extends DaoImpl implements IProxyUserDao {
 	}
 
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<ProxyUser> getPUsers(Collection<String> usernames) {
 		if (CollectionUtils.isEmpty(usernames)) {

@@ -60,7 +60,7 @@ public class ProxyAuthDaoImpl extends ReadonlyDaoImpl implements IProxyAuthDao {
             return Collections.emptyList();
         }
         //get users from cache
-        List<PrimitiveCacheable> values = cacheManager.mget(CacheType.username2Id, usernames);
+        List<PrimitiveCacheable> values = cacheManager.mget(CacheType.username2ProxyUser, usernames);
         List<Long> hitIds = new ArrayList<Long>();
         List<String> missUsernames = new ArrayList<String>();
         int i = 0;

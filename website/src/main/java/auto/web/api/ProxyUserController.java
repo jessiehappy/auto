@@ -253,6 +253,13 @@ public class ProxyUserController {
 		return JsonUtils.toJson(result);
 	}
 	
+	//add by wangLongtao
+	@RequestMapping(value="/commission/info",method=RequestMethod.POST)
+	@ResponseBody
+	public String commissionInfo(HttpServletRequest request,HttpServletResponse response){
+		
+		return null;
+	}
 	
 }
 	

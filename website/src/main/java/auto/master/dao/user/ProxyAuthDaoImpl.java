@@ -1,7 +1,6 @@
 package auto.master.dao.user;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -17,14 +16,6 @@ import auto.datamodel.dao.ProxyAuth;
 @Repository("masterPAuthDao")
 public class ProxyAuthDaoImpl extends DaoImpl implements IProxyAuthDao {
     
-	private Criterion getUsernameCriterion(Collection<String> usernames) {
-		return Restrictions.or(
-				Restrictions.in("username", usernames),
-				Restrictions.in("realName", usernames),
-				Restrictions.in("idNo", usernames)
-     );
-	}
-	
 	private Criterion getUsernameCriterion(String username) {
 		return Restrictions.or(
 				Restrictions.eq("username", username),
@@ -38,11 +29,11 @@ public class ProxyAuthDaoImpl extends DaoImpl implements IProxyAuthDao {
         if (object == null) return ;
         if(object instanceof ProxyAuth){
         	ProxyAuth user=(ProxyAuth)object;
-        	cacheManager.deprecate(CacheType.id2User, user.getId());
+        	cacheManager.deprecate(CacheType.id2ProxyUser, user.getId());
         	List<String> usernames=new ArrayList<String>();
         	/*if(user.getTelephone()!=null)usernames.add(user.getTelephone());
         	if(user.getWechatId()!=null) usernames.add(user.getWechatId());*/
-        	cacheManager.mdeprecate(CacheType.username2Id, usernames);
+        	cacheManager.mdeprecate(CacheType.username2ProxyUser, usernames);
         }
     }
     @SuppressWarnings("unchecked")

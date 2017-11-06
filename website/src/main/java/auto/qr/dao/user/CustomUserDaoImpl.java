@@ -1,7 +1,6 @@
 package auto.qr.dao.user;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -16,19 +15,13 @@ import auto.dao.impl.ReadonlyDaoImpl;
 import auto.datamodel.cache.CacheType;
 import auto.datamodel.cache.PrimitiveCacheable;
 import auto.datamodel.dao.CustomUser;
+import auto.datamodel.dao.DealerUser;
+import lombok.extern.apachecommons.CommonsLog;
 
 @Repository
 @SuppressWarnings("unchecked")
+@CommonsLog
 public class CustomUserDaoImpl extends ReadonlyDaoImpl implements ICustomUserDao {
-	
-	private Criterion getUsernameCriterion(Collection<String> usernames) {
-		return Restrictions.or(
-				Restrictions.in("username", usernames),
-				Restrictions.in("telephone", usernames),
-				Restrictions.in("openId", usernames),
-				Restrictions.in("wechatId", usernames)
-     );
-	}
 	
 	private Criterion getUsernameCriterion(String username) {
 		return Restrictions.or(
@@ -41,13 +34,13 @@ public class CustomUserDaoImpl extends ReadonlyDaoImpl implements ICustomUserDao
 	
 	@Override
 	public CustomUser getCUser(long id) {
-		CustomUser user=cacheManager.get(CacheType.id2User, id);
+		CustomUser user=cacheManager.get(CacheType.id2CustomUser, id);
 		if(user==null){
 			user=get(CustomUser.class, id);
 			if(user==null){
 				user=CustomUser.EMPTY;
 			}
-			cacheManager.set(CacheType.id2User, id, user);
+			cacheManager.set(CacheType.id2CustomUser, id, user);
 		}
 		return user.isEmpty()?null:user;
 	}
@@ -56,7 +49,7 @@ public class CustomUserDaoImpl extends ReadonlyDaoImpl implements ICustomUserDao
 	@Override
     public CustomUser getCUser(String username) {
         if (username == null) return null;
-        PrimitiveCacheable value = cacheManager.get(CacheType.username2Id, username);
+        PrimitiveCacheable value = cacheManager.get(CacheType.username2CustomUser, username);
         if (value != null) {
             if (value.isEmpty()) {
                 return null;
@@ -68,12 +61,12 @@ public class CustomUserDaoImpl extends ReadonlyDaoImpl implements ICustomUserDao
                     .add(getUsernameCriterion(username))
                     .list();
             if (users.isEmpty()) {
-                cacheManager.set(CacheType.username2Id, username, PrimitiveCacheable.EMPTY);
+                cacheManager.set(CacheType.username2CustomUser, username, PrimitiveCacheable.EMPTY);
                 return null;
             }
             CustomUser minUser = users.get(0);
-            cacheManager.set(CacheType.username2Id, username, new PrimitiveCacheable(minUser.getId()));
-            cacheManager.set(CacheType.id2User, minUser.getId(), minUser);
+            cacheManager.set(CacheType.username2CustomUser, username, new PrimitiveCacheable(minUser.getId()));
+            cacheManager.set(CacheType.id2CustomUser, minUser.getId(), minUser);
             return minUser;
         }
     }
@@ -85,7 +78,7 @@ public class CustomUserDaoImpl extends ReadonlyDaoImpl implements ICustomUserDao
             return Collections.emptyList();
         }
         //get users from cache
-        List<PrimitiveCacheable> values = cacheManager.mget(CacheType.username2Id, usernames);
+        List<PrimitiveCacheable> values = cacheManager.mget(CacheType.username2CustomUser, usernames);
         List<Long> hitIds = new ArrayList<Long>();
         List<String> missUsernames = new ArrayList<String>();
         int i = 0;
@@ -101,7 +94,7 @@ public class CustomUserDaoImpl extends ReadonlyDaoImpl implements ICustomUserDao
         List<CustomUser> users = new ArrayList<CustomUser>();
         List<Long> missIds = new ArrayList<Long>();
         if (!hitIds.isEmpty()) {
-            List<CustomUser> hitUsers = cacheManager.mget(CacheType.id2User, hitIds);
+            List<CustomUser> hitUsers = cacheManager.mget(CacheType.id2CustomUser, hitIds);
             for (i = 0; i < hitIds.size(); i++) {
                 Long id = hitIds.get(i);
                 CustomUser user = hitUsers.get(i);
@@ -134,8 +127,8 @@ public class CustomUserDaoImpl extends ReadonlyDaoImpl implements ICustomUserDao
                     username2Id.put(username, PrimitiveCacheable.EMPTY);
                 }
             }
-            cacheManager.mset(CacheType.username2Id, username2Id);
-            cacheManager.mset(CacheType.id2User, id2User);
+            cacheManager.mset(CacheType.username2CustomUser, username2Id);
+            cacheManager.mset(CacheType.id2CustomUser, id2User);
         }
         if (!CollectionUtils.isEmpty(missIds)) {
             List<CustomUser> missUsers = (List<CustomUser>)getSession().createCriteria(CustomUser.class)
@@ -154,11 +147,36 @@ public class CustomUserDaoImpl extends ReadonlyDaoImpl implements ICustomUserDao
                     id2User.put(id, CustomUser.EMPTY);
                 }
             }
-            cacheManager.mset(CacheType.id2User, id2User);
+            cacheManager.mset(CacheType.id2CustomUser, id2User);
         }
         
         return users;
 	}
 
+	@Override
+	public CustomUser getUserByToken(String token) {
+		PrimitiveCacheable value = cacheManager.get(CacheType.customeToken2Id, token);
+        if (value != null) {
+            if (value.isEmpty()) {
+                return null;
+            }
+            Long id = value.get();
+            return getCUser(id);
+        }
+        List<CustomUser> users = (List<CustomUser>) getSession().createCriteria(CustomUser.class)
+                .add(Restrictions.eq("token", token))
+                .list();
+        if (users.size() > 1) {
+            log.error("duplicated token! token = " + token);
+        }
+        if (CollectionUtils.isEmpty(users)) {
+            cacheManager.set(CacheType.customeToken2Id, token, PrimitiveCacheable.EMPTY);
+            return null;
+        }
+        CustomUser user = users.get(0);
+        cacheManager.set(CacheType.customeToken2Id, token, new PrimitiveCacheable(user.getId()));
+        cacheManager.set(CacheType.id2CustomUser, user.getId(), user);
+        return user;
+	}
     
 }

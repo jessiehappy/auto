@@ -1,7 +1,6 @@
 package auto.qr.dao.user;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -16,19 +15,12 @@ import auto.dao.impl.ReadonlyDaoImpl;
 import auto.datamodel.cache.CacheType;
 import auto.datamodel.cache.PrimitiveCacheable;
 import auto.datamodel.dao.DealerUser;
+import lombok.extern.apachecommons.CommonsLog;
 
 @Repository
 @SuppressWarnings("unchecked")
+@CommonsLog
 public class DealerUserDaoImpl extends ReadonlyDaoImpl implements IDealerUserDao {
-	
-	private Criterion getUsernameCriterion(Collection<String> usernames) {
-		return Restrictions.or(
-				Restrictions.in("username", usernames),
-				Restrictions.in("telephone", usernames),
-				Restrictions.in("openId", usernames),
-				Restrictions.in("wechatId", usernames)
-     );
-	}
 	
 	private Criterion getUsernameCriterion(String username) {
 		return Restrictions.or(
@@ -41,13 +33,13 @@ public class DealerUserDaoImpl extends ReadonlyDaoImpl implements IDealerUserDao
 	
 	@Override
 	public DealerUser getDUser(long id) {
-		DealerUser user=cacheManager.get(CacheType.id2User, id);
+		DealerUser user=cacheManager.get(CacheType.id2dealerUser, id);
 		if(user==null){
 			user=get(DealerUser.class, id);
 			if(user==null){
 				user=DealerUser.EMPTY;
 			}
-			cacheManager.set(CacheType.id2User, id, user);
+			cacheManager.set(CacheType.id2dealerUser, id, user);
 		}
 		return user.isEmpty()?null:user;
 	}
@@ -56,7 +48,7 @@ public class DealerUserDaoImpl extends ReadonlyDaoImpl implements IDealerUserDao
 	@Override
     public DealerUser getDUser(String username) {
         if (username == null) return null;
-        PrimitiveCacheable value = cacheManager.get(CacheType.username2Id, username);
+        PrimitiveCacheable value = cacheManager.get(CacheType.username2DealerUser, username);
         if (value != null) {
             if (value.isEmpty()) {
                 return null;
@@ -68,12 +60,12 @@ public class DealerUserDaoImpl extends ReadonlyDaoImpl implements IDealerUserDao
                     .add(getUsernameCriterion(username))
                     .list();
             if (users.isEmpty()) {
-                cacheManager.set(CacheType.username2Id, username, PrimitiveCacheable.EMPTY);
+                cacheManager.set(CacheType.username2DealerUser, username, PrimitiveCacheable.EMPTY);
                 return null;
             }
             DealerUser minUser = users.get(0);
-            cacheManager.set(CacheType.username2Id, username, new PrimitiveCacheable(minUser.getId()));
-            cacheManager.set(CacheType.id2User, minUser.getId(), minUser);
+            cacheManager.set(CacheType.username2DealerUser, username, new PrimitiveCacheable(minUser.getId()));
+            cacheManager.set(CacheType.id2dealerUser, minUser.getId(), minUser);
             return minUser;
         }
     }
@@ -85,7 +77,7 @@ public class DealerUserDaoImpl extends ReadonlyDaoImpl implements IDealerUserDao
             return Collections.emptyList();
         }
         //get users from cache
-        List<PrimitiveCacheable> values = cacheManager.mget(CacheType.username2Id, usernames);
+        List<PrimitiveCacheable> values = cacheManager.mget(CacheType.username2DealerUser, usernames);
         List<Long> hitIds = new ArrayList<Long>();
         List<String> missUsernames = new ArrayList<String>();
         int i = 0;
@@ -101,7 +93,7 @@ public class DealerUserDaoImpl extends ReadonlyDaoImpl implements IDealerUserDao
         List<DealerUser> users = new ArrayList<DealerUser>();
         List<Long> missIds = new ArrayList<Long>();
         if (!hitIds.isEmpty()) {
-            List<DealerUser> hitUsers = cacheManager.mget(CacheType.id2User, hitIds);
+            List<DealerUser> hitUsers = cacheManager.mget(CacheType.id2dealerUser, hitIds);
             for (i = 0; i < hitIds.size(); i++) {
                 Long id = hitIds.get(i);
                 DealerUser user = hitUsers.get(i);
@@ -134,8 +126,8 @@ public class DealerUserDaoImpl extends ReadonlyDaoImpl implements IDealerUserDao
                     username2Id.put(username, PrimitiveCacheable.EMPTY);
                 }
             }
-            cacheManager.mset(CacheType.username2Id, username2Id);
-            cacheManager.mset(CacheType.id2User, id2User);
+            cacheManager.mset(CacheType.username2DealerUser, username2Id);
+            cacheManager.mset(CacheType.id2dealerUser, id2User);
         }
         if (!CollectionUtils.isEmpty(missIds)) {
             List<DealerUser> missUsers = (List<DealerUser>)getSession().createCriteria(DealerUser.class)
@@ -154,11 +146,35 @@ public class DealerUserDaoImpl extends ReadonlyDaoImpl implements IDealerUserDao
                     id2User.put(id, DealerUser.EMPTY);
                 }
             }
-            cacheManager.mset(CacheType.id2User, id2User);
+            cacheManager.mset(CacheType.id2dealerUser, id2User);
         }
         
         return users;
 	}
 
-    
+	@Override
+	public DealerUser getUserByToken(String token) {
+		PrimitiveCacheable value = cacheManager.get(CacheType.dealerToken2Id, token);
+        if (value != null) {
+            if (value.isEmpty()) {
+                return null;
+            }
+            Long id = value.get();
+            return getDUser(id);
+        }
+        List<DealerUser> users = (List<DealerUser>) getSession().createCriteria(DealerUser.class)
+                .add(Restrictions.eq("token", token))
+                .list();
+        if (users.size() > 1) {
+            log.error("duplicated token! token = " + token);
+        }
+        if (CollectionUtils.isEmpty(users)) {
+            cacheManager.set(CacheType.dealerToken2Id, token, PrimitiveCacheable.EMPTY);
+            return null;
+        }
+        DealerUser user = users.get(0);
+        cacheManager.set(CacheType.dealerToken2Id, token, new PrimitiveCacheable(user.getId()));
+        cacheManager.set(CacheType.id2dealerUser, user.getId(), user);
+        return user;
+	}
 }

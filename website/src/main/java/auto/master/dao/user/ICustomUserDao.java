@@ -13,5 +13,5 @@ public interface ICustomUserDao extends IDao{
 	List<CustomUser> getCUsers(Collection<String> usernames);
 
 	CustomUser createCUser(CustomUser user);
-    
+
 }

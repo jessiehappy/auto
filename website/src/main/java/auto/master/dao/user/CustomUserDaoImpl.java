@@ -42,14 +42,15 @@ public class CustomUserDaoImpl extends DaoImpl implements ICustomUserDao {
         if (object == null) return ;
         if(object instanceof CustomUser){
         	CustomUser user=(CustomUser)object;
-        	cacheManager.deprecate(CacheType.id2User, user.getId());
+        	cacheManager.deprecate(CacheType.id2CustomUser, user.getId());
         	List<String> usernames=new ArrayList<String>();
         	if(user.getTelephone()!=null)usernames.add(user.getTelephone());
         	if(user.getWechatId()!=null) usernames.add(user.getWechatId());
-        	cacheManager.mdeprecate(CacheType.username2Id, usernames);
+        	cacheManager.mdeprecate(CacheType.username2CustomUser, usernames);
         }
     }
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public CustomUser getCUser(String username) {
 		List<CustomUser> users = (List<CustomUser>) getSession().createCriteria(CustomUser.class)
@@ -72,6 +73,7 @@ public class CustomUserDaoImpl extends DaoImpl implements ICustomUserDao {
 	}
 
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<CustomUser> getCUsers(Collection<String> usernames) {
 		if (CollectionUtils.isEmpty(usernames)) {
