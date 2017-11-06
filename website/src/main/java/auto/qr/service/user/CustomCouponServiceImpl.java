@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import auto.datamodel.controller.coupon.CustomCoupon;
+import auto.datamodel.controller.coupon.CustomCouponDetail;
 import auto.datamodel.controller.coupon.CustomCouponList;
 import auto.datamodel.dao.AutoCoupon;
 import auto.datamodel.dao.Coupon;
@@ -66,5 +67,12 @@ public class CustomCouponServiceImpl implements ICustomCouponService {
 			list.add(customCoupons);
 		}
 		return list;
+	}
+
+
+	@Override
+	public CustomCouponDetail getCouponDetail(Long couponId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
